@@ -1,0 +1,6 @@
+ADD FEATURES
+	Ilagay yung List of Companies sa lahat ng type of user except for the company accounts
+	Add total of trainee need ng company, kahit add another column nalang sa company list. Then if full na. Change statust to FULL CAPACITY sana makita din ng lahat ng users except for the company accounts
+	Calendar sa dashboard kahit simple na kung anong date ngayon or month calendar. ma highlight lang anong araw ngayon
+	annoucement tab: makapag send annoucement si faculty para sa student under nya. makapag send din si admin ng annoucement for the faculty
+	

@@ -1,0 +1,7 @@
+Navbar Color (Yung asa taas) - #763435
+Sidebar Color (Yung nasa kaliwa) - #364150
+Text Color in Navbar only (Yung sa Pangalan)- #ffffff
+Text Color in Sidebar only when no selected- #b4bcc8
+color of the Selected tab on Sidebar - #1caf9a
+text color in Selected tab on Sidebar - #ffffff
+
