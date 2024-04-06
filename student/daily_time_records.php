@@ -12,101 +12,6 @@ if($_SESSION['auth_user']['student_id']==0){
     
 }
 
-
-
-// if (isset($_POST['timeINtimeOUT'])) {
-//     // Set the timezone to 'Asia/Manila'
-//     date_default_timezone_set('Asia/Manila');
-
-//     // Get the current time in a 24-hour format (H:i)
-//     $currentTime = date('H:i');
-
-//     // Check if the current time is in PM (after 12:00 PM)
-//     $isPM = (int) date('H') >= 12;
-
-//     // Get the form input values
-//     $date_record = $_POST['date_record'];
-
-//     // Check if the date exists for the user in the database
-//     $studID = $_SESSION['auth_user']['student_id'];
-
-//     $stmt = $conn->prepare("SELECT * FROM stud_daily_time_records WHERE stud_id = ? AND recordDate = ?");
-//     $stmt->execute([$studID, $date_record]);
-//     $existingRecord = $stmt->fetch(PDO::FETCH_ASSOC);
-
-//     if ($existingRecord) {
-//         if ($isPM) {
-//             // Check if PM_time_IN is empty and not '00:00:00', and update it if needed
-//             if (empty($existingRecord['PM_time_IN']) || $existingRecord['PM_time_IN'] == '00:00:00') {
-//                 $stmt = $conn->prepare("UPDATE stud_daily_time_records SET PM_time_IN = ? WHERE stud_id = ? AND recordDate = ?");
-//                 $stmt->execute([$currentTime, $studID, $date_record]);
-//             } else {
-//                 // Update PM_time_OUT if PM_time_IN is not empty and not '00:00:00'
-//                 if (empty($existingRecord['PM_time_OUT']) || $existingRecord['PM_time_OUT'] == '00:00:00') {
-//                     $stmt = $conn->prepare("UPDATE stud_daily_time_records SET PM_time_OUT = ? WHERE stud_id = ? AND recordDate = ?");
-//                     $stmt->execute([$currentTime, $studID, $date_record]);
-
-//                     // Calculate the total hours spent
-//         $totalHours = calculateTotalHours($existingRecord['AM_time_IN'], $existingRecord['AM_time_OUT'], $existingRecord['PM_time_IN'], $existingRecord['PM_time_OUT']);
-
-//         // Update the total_working_hours column
-//         $stmt = $conn->prepare("UPDATE stud_daily_time_records SET total_working_hours = ? WHERE stud_id = ? AND recordDate = ?");
-//         $stmt->execute([$totalHours, $studID, $date_record]);
-
-//                 }
-//             }
-//         } else {
-//             // Check if AM_time_OUT is empty and not '00:00:00', and update it if needed
-//             if (empty($existingRecord['AM_time_OUT']) || $existingRecord['AM_time_OUT'] == '00:00:00') {
-//                 $stmt = $conn->prepare("UPDATE stud_daily_time_records SET AM_time_OUT = ? WHERE stud_id = ? AND recordDate = ?");
-//                 $stmt->execute([$currentTime, $studID, $date_record]);
-//             }
-//         }
-
-//         // Calculate the total hours spent
-//         $totalHours = calculateTotalHours($existingRecord['AM_time_IN'], $existingRecord['AM_time_OUT'], $existingRecord['PM_time_IN'], $existingRecord['PM_time_OUT']);
-
-//         // Update the total_working_hours column
-//         $stmt = $conn->prepare("UPDATE stud_daily_time_records SET total_working_hours = ? WHERE stud_id = ? AND recordDate = ?");
-//         $stmt->execute([$totalHours, $studID, $date_record]);
-//     } else {
-//         if ($isPM) {
-//             // If no record exists and it's in PM, insert a new record with PM_time_IN and total_working_hours
-//             $stmt = $conn->prepare("INSERT INTO stud_daily_time_records (stud_id, recordDate, PM_time_IN, total_working_hours) VALUES (?, ?, ?, ?)");
-//             $stmt->execute([$studID, $date_record, $currentTime, 0]);
-//         } else {
-//             // If no record exists and it's not in PM, insert a new record with AM_time_OUT and total_working_hours
-//             $stmt = $conn->prepare("INSERT INTO stud_daily_time_records (stud_id, recordDate, AM_time_OUT, total_working_hours) VALUES (?, ?, ?, ?)");
-//             $stmt->execute([$studID, $date_record, $currentTime, 0]);
-//         }
-//     }
-// }
-
-// function calculateTotalHours($amTimeIn, $amTimeOut, $pmTimeIn, $pmTimeOut) {
-//     $totalHours = 0;
-
-//     if (!empty($amTimeIn) && !empty($amTimeOut) && $amTimeIn != '00:00:00' && $amTimeOut != '00:00:00') {
-//         $amTimeIn = strtotime($amTimeIn);
-//         $amTimeOut = strtotime($amTimeOut);
-//         $amHours = floor(($amTimeOut - $amTimeIn) / 3600); // Full hours
-//         $amMinutes = round((($amTimeOut - $amTimeIn) % 3600) / 60); // Minutes
-//         $totalHours += $amHours + ($amMinutes / 60); // Convert minutes to hours
-//     }
-
-//     if (!empty($pmTimeIn) && !empty($pmTimeOut) && $pmTimeIn != '00:00:00' && $pmTimeOut != '00:00:00') {
-//         $pmTimeIn = strtotime($pmTimeIn);
-//         $pmTimeOut = strtotime($pmTimeOut);
-//         $pmHours = floor(($pmTimeOut - $pmTimeIn) / 3600); // Full hours
-//         $pmMinutes = round((($pmTimeOut - $pmTimeIn) % 3600) / 60); // Minutes
-//         $totalHours += $pmHours + ($pmMinutes / 60); // Convert minutes to hours
-//     }
-
-//     return $totalHours;
-// }
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -144,8 +49,15 @@ if($_SESSION['auth_user']['student_id']==0){
     <!---------------------DATATABLES------------------------->
     <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" rel="stylesheet">
+    <!----------------------CAMERA---------------------------->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
 
-    
+    <style>
+        /* Flip the video feed horizontally */
+        #my_camera {
+            transform: scaleX(-1);
+        }
+    </style>
 </head>
 
 <body>
@@ -200,13 +112,14 @@ require_once 'templates/stud_navbar.php';
                         <option value="PM Time Out">PM Time Out</option>
                       </select>
                     </div>
-                    <div id="webcam-container">
-                        <video id="webcam" autoplay></video>
-                        <canvas id="canvas" style="display:none;"></canvas>
-                        <img id="image-preview" style="display:none;"></img>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div id="my_camera"></div>
+                        </div>
                     </div>
                 </div>
-                    <button name="timeINtimeOUT" class="btn btn-success">Save Time</button>
+                    <button name="timeINtimeOUT" onClick="take_snapshot()" class="btn btn-success">Save Time</button>
+                    <input type="hidden" name="image" class="image-tag">
                 </form>
 <br><br>
 
@@ -282,15 +195,6 @@ if (isset($_SESSION['auth_user']['student_id'])) {
         </div>
     </div>
 
-<!-- <script>
-    new DataTable('#examples');
-    
-</script> -->
-
-
-<!-- Initialize DataTables with export buttons -->
-
-
 <!-- Initialize DataTables with export buttons -->
 <script>
     $(document).ready(function() {
@@ -302,55 +206,21 @@ if (isset($_SESSION['auth_user']['student_id'])) {
         });
     });
 </script>
-<script>
-// Access the webcam
-navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function(stream) {
-        var video = document.getElementById('webcam');
-        video.srcObject = stream;
-    })
-    .catch(function(err) {
-        console.log("An error occurred: " + err);
-    });
 
-// Capture image from webcam
-function captureImage() {
-    var canvas = document.getElementById('canvas');
-    var video = document.getElementById('webcam');
-    var context = canvas.getContext('2d');
-    context.drawImage(video,  0,  0,  640,  480);
-    var imageData = canvas.toDataURL('image/png');
-    document.getElementById('image-preview').src = imageData;
-    document.getElementById('image-preview').style.display = 'block';
-}
-
-// Call this function when the user clicks the "Save Time" button
-document.getElementById('timeINtimeOUT').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent the form from submitting immediately
-    captureImage();
-    var imageData = document.getElementById('image-preview').src;
-    var formData = new FormData();
-    formData.append('image', imageData);
-    formData.append('date_record', document.querySelector('input[name="date_record"]').value);
-    formData.append('time_record', document.querySelector('input[name="time_record"]').value);
-    formData.append('selectTIMEinTIMEout', document.querySelector('select[name="selectTIMEinTIMEout"]').value);
-    // Add other form data as needed
-
-    // Send the form data to the server
-    fetch('save_daily_time_records.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.text())
-    .then(data => {
-        console.log(data);
-        // Handle the response from the server
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-});
-
+<script language="JavaScript">
+        Webcam.set({
+            width:  490,
+            height:  390,
+            image_format: 'jpeg',
+            jpeg_quality:  90
+        });
+        Webcam.attach('#my_camera');
+        function take_snapshot() {
+            Webcam.snap(function(data_uri) {
+                $(".image-tag").val(data_uri);
+                document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+            });
+        }
 </script>
 
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>

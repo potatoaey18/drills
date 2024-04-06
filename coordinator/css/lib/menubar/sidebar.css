@@ -205,10 +205,12 @@ body {
 /* Hide to Small bar */
 
 .sidebar-hide .sidebar.sidebar-hide-to-small {
-    position: absolute;
+    position: fixed; /* Changed from absolute to fixed */
     width: 60px;
     left: 0;
     top: 0px;
+    bottom: 0px; /* Added to stretch to the bottom of the viewport */
+    height: 100vh; /* This will make the height equal to the viewport height */
 }
 
 .sidebar-hide .sidebar.sidebar-hide-to-small, .sidebar-hide .sidebar.sidebar-hide-to-small .nano, .sidebar-hide .sidebar.sidebar-hide-to-small .nano-content {

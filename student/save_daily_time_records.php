@@ -11,18 +11,19 @@ session_start();
 function calculateTotalHours($amTimeIn, $amTimeOut, $pmTimeIn, $pmTimeOut) {
     $totalHours = 0;
 
+    // Calculate AM hours if both time in and time out are provided
     if (!empty($amTimeIn) && !empty($amTimeOut)) {
-        $amHours = (strtotime($amTimeOut) - strtotime($amTimeIn)) / 3600;
-        $totalHours += $amHours;
+        $totalHours += (strtotime($amTimeOut) - strtotime($amTimeIn)) / 3600;
     }
 
+    // Calculate PM hours if both time in and time out are provided
     if (!empty($pmTimeIn) && !empty($pmTimeOut)) {
-        $pmHours = (strtotime($pmTimeOut) - strtotime($pmTimeIn)) / 3600;
-        $totalHours += $pmHours;
+        $totalHours += (strtotime($pmTimeOut) - strtotime($pmTimeIn)) / 3600;
     }
 
     return $totalHours;
 }
+
 
 if (isset($_POST['timeINtimeOUT'])) {
     date_default_timezone_set('Asia/Manila');
@@ -30,30 +31,34 @@ if (isset($_POST['timeINtimeOUT'])) {
     $time_record = $_POST['time_record'];
     $selectTIMEinTIMEout = $_POST['selectTIMEinTIMEout'];
 
-    $studID = $_SESSION['auth_user']['student_id'];
+    // Your existing image storing code
+    $img = $_POST['image'];
+    $folderPath = "upload/";
+    $image_parts = explode(";base64,", $img);
+    $image_type_aux = explode("image/", $image_parts[0]);
+    $image_type = $image_type_aux[1];
+    $image_base64 = base64_decode($image_parts[1]);
+    $fileName = uniqid() . '.png';
+    $file = $folderPath . $fileName;
+    file_put_contents($file, $image_base64);
+    $filePath = $file;
 
-    // Handle the image upload
-    $uploadDir = 'uploads/';
-    $uploadFilePath = $uploadDir . basename($_FILES['image']['name']);
-    if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFilePath)) {
-        // The image has been uploaded successfully
-        // Now, insert the path into the database
-        $image_path = $uploadFilePath;
-    } else {
-        $image_path = ''; // Set to an empty string or a default image path if the upload fails
-    }
+    $studID = $_SESSION['auth_user']['student_id'];
 
     $stmt = $conn->prepare("SELECT * FROM stud_daily_time_records WHERE stud_id = ? AND recordDate = ?");
     $stmt->execute([$studID, $date_record]);
     $existingRecord = $stmt->fetch(PDO::FETCH_ASSOC);
+
     if (!$existingRecord) {
         if ($selectTIMEinTIMEout == "AM Time In") {
-            $insertStatement = "INSERT INTO stud_daily_time_records (stud_id, recordDate, AM_time_IN, total_working_hours, image_path) VALUES (?, ?, ?,  0, ?)";
+            $insertStatement = "INSERT INTO stud_daily_time_records (stud_id, recordDate, AM_time_IN, AM_time_IN_pic, total_working_hours) VALUES (?, ?, ?, ?, 0)";
             $stmt = $conn->prepare($insertStatement);
-            $stmt->execute([$studID, $date_record, $time_record, $image_path]);
+            $stmt->execute([$studID, $date_record, $time_record, $filePath]);
         }
     } else {
         if ($selectTIMEinTIMEout == "AM Time Out") {
+            $stmt = $conn->prepare("UPDATE stud_daily_time_records SET AM_time_OUT_pic = ? WHERE stud_id = ? AND recordDate = ?");
+            $stmt->execute([$filePath, $studID, $date_record]);
             $stmt = $conn->prepare("UPDATE stud_daily_time_records SET AM_time_OUT = ? WHERE stud_id = ? AND recordDate = ?");
             $stmt->execute([$time_record, $studID, $date_record]);
 
@@ -68,6 +73,8 @@ if (isset($_POST['timeINtimeOUT'])) {
             $stmt = $conn->prepare("UPDATE stud_daily_time_records SET total_working_hours = ? WHERE stud_id = ? AND recordDate = ?");
             $stmt->execute([$totalHours, $studID, $date_record]);
         } elseif ($selectTIMEinTIMEout == "PM Time In") {
+            $stmt = $conn->prepare("UPDATE stud_daily_time_records SET PM_time_IN_pic = ? WHERE stud_id = ? AND recordDate = ?");
+            $stmt->execute([$filePath, $studID, $date_record]);
             $stmt = $conn->prepare("UPDATE stud_daily_time_records SET PM_time_IN = ? WHERE stud_id = ? AND recordDate = ?");
             $stmt->execute([$time_record, $studID, $date_record]);
 
@@ -82,6 +89,8 @@ if (isset($_POST['timeINtimeOUT'])) {
             $stmt = $conn->prepare("UPDATE stud_daily_time_records SET total_working_hours = ? WHERE stud_id = ? AND recordDate = ?");
             $stmt->execute([$totalHours, $studID, $date_record]);
         } elseif ($selectTIMEinTIMEout == "PM Time Out") {
+            $stmt = $conn->prepare("UPDATE stud_daily_time_records SET PM_time_OUT_pic = ? WHERE stud_id = ? AND recordDate = ?");
+            $stmt->execute([$filePath, $studID, $date_record]);
             $stmt = $conn->prepare("UPDATE stud_daily_time_records SET PM_time_OUT = ? WHERE stud_id = ? AND recordDate = ?");
             $stmt->execute([$time_record, $studID, $date_record]);
 
@@ -101,26 +110,5 @@ if (isset($_POST['timeINtimeOUT'])) {
     header('Location: daily_time_records.php');
     exit();
 }
-
-// Function to calculate working hours
-// function calculateWorkingHours($timeIn, $timeOut) {
-//     $timeIn = strtotime($timeIn);
-//     $timeOut = strtotime($timeOut);
-
-//     if ($timeIn === false || $timeOut === false) {
-//         return 0;
-//     }
-
-//     // Check if timeOut is greater than timeIn to avoid negative working hours
-//     if ($timeOut > $timeIn) {
-//         $hours = ($timeOut - $timeIn) / 3600;
-//         return $hours;
-//     }
-
-//     return 0; // Invalid time range, return 0
-// }
-
-
-
 
 ?>

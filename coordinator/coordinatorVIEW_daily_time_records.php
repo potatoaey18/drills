@@ -99,17 +99,17 @@ require_once 'templates/coordinators_navbar.php';
                     <!-- /# column -->
                 </div>
                 
-
-    <table id="datatablessss" class="table table-striped table-bordered" style="width:100%">
+<div id="Time" class="tabpane" style="overflow: auto;">
+    <table id="datatablessss" class="table table-bordered table-condensed table-striped table-hover" style="width:100%">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>A.M Time In</th>
-                <th>A.M Time Out</th>
-                <th>P.M Time In</th>
-                <th>P.M Time Out</th>
-                <th>Total Working Hours</th>
-                <th>Status</th>
+                <th class="text-center">Date</th>
+                <th class="text-center">A.M Time In</th>
+                <th class="text-center">A.M Time Out</th>
+                <th class="text-center">P.M Time In</th>
+                <th class="text-center">P.M Time Out</th>
+                <th class="text-center">Total Working Hours</th>
+                <th class="text-center">Status</th>
             </tr>
         </thead>
         <tbody>
@@ -124,13 +124,13 @@ if (isset($_GET['student_ID'])) {
     foreach ($data as $result) {
 ?>
         <tr>
-            <td><?= $result['recordDate'] ?></td>
-            <td><?= $result['AM_time_IN'] ?></td>
-            <td><?= $result['AM_time_OUT'] ?></td>
-            <td><?= $result['PM_time_IN'] ?></td>
-            <td><?= $result['PM_time_OUT'] ?></td>
-            <td><?= $result['total_working_hours'] ?></td>
-            <td><?= $result['recordStatus'] ?></td>
+            <td class="autofit"><?= $result['recordDate'] ?></td>
+            <td class="autofit"><?= $result['AM_time_IN'] . '<br>' . '<img src="../student/'. $result['AM_time_IN_pic'] . '" alt="AM Time In Picture" width="300" height="300">' ?></td>
+            <td class="autofit"><?= $result['AM_time_OUT'] . '<br>' . '<img src="../student/'. $result['AM_time_OUT_pic'] . '" alt="AM Time Out Picture" width="300" height="300">'?></td>
+            <td class="autofit"><?= $result['PM_time_IN'] . '<br>' . '<img src="../student/'. $result['PM_time_IN_pic'] . '" alt="PM Time In Picture" width="300" height="300">'?></td>
+            <td class="autofit"><?= $result['PM_time_OUT'] . '<br>' . '<img src="../student/'. $result['PM_time_OUT_pic'] . '" alt="PM Time Out Picture" width="300" height="300">'?></td>
+            <td class="autofit"><?= $result['total_working_hours'] ?></td>
+            <td class="autofit"><?= $result['recordStatus'] ?></td>
         </tr>
 <?php
     }
@@ -150,7 +150,7 @@ if (isset($_GET['student_ID'])) {
             </tr>
         </tfoot>
     </table>
-
+</div>
 
 
                 <!-- /# row -->
