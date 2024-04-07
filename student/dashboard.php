@@ -73,7 +73,7 @@ require_once 'templates/stud_navbar.php';
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>Hello, <span><?php echo htmlspecialchars($first_name); ?></span></h1>
+                                <h1>Hello, <span style="font-size: 18px; color: black;"><?php echo htmlspecialchars($first_name); ?></span></h1>
                             </div>
                         </div>
                     </div>
@@ -502,16 +502,30 @@ $attendance_and_punctuality = array_column($rows, 'attendance_and_punctuality');
 
                         ]
 		},
-		options: {
-			scales: {
-				yAxes: [ {
-					ticks: {
-						beginAtZero: true
-					}
-                                } ]
-			}
-		}
-	} );
+        options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            xAxes: [{
+                ticks: {
+                    autoSkip: false,
+                    maxRotation: 90,
+                    minRotation: 45,
+                    callback: function(value, index, values) {
+                        // Change font size based on window width
+                        var fontSize = window.innerWidth < 512 ? 10 : 14;
+                        return Chart.helpers.isArray(value) ? value.join(' ') : value;
+                    }
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
 
     <?php
 $studID = $_SESSION['auth_user']['student_id'];

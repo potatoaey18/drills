@@ -101,7 +101,7 @@
   font-size: 18px;
 }
 .card-title p {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
   margin-bottom: 12px;
 }
 .card-header-right-icon {
@@ -477,7 +477,7 @@ a.dt-button.active:not(.disabled) {
   margin: 15px 0;
 }
 .panel-body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 .panel-primary {
   border-color: #5873fe;
@@ -762,7 +762,7 @@ a.dt-button.active:not(.disabled) {
 }
 .dropdown-content-heading span {
   font-size: 13px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
   color: #373757;
 }
 .dropdown-content-heading i {
@@ -806,7 +806,7 @@ a.dt-button.active:not(.disabled) {
 }
 .notification-text {
   font-size: 12px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -852,7 +852,7 @@ a.dt-button.active:not(.disabled) {
   color: #373757;
 }
 .dropdown-profile li a span {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 14px;
 }
 .dropdown-profile li a i {
@@ -875,6 +875,8 @@ a.dt-button.active:not(.disabled) {
   padding: 0 15px;
   border-bottom: 0;
   border-radius: 3px;
+  background-color: #e0ebf9;
+  border-color: #e0ebf9;
 }
 .main .page-header h1 {
   font-size: 18px;
@@ -891,13 +893,13 @@ a.dt-button.active:not(.disabled) {
   float: right;
 }
 .main .page-header .breadcrumb li.active {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: normal;
   font-size: 14px;
 }
 .main .page-header .breadcrumb li a {
   font-size: 14px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
   display: block;
 }
 .dropdown-task .progress {
@@ -932,16 +934,16 @@ a.dt-button.active:not(.disabled) {
   transition: all 0.5s ease 0s;
 }
 .chat-sidebar .user-name {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 .chat-sidebar .content {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 .chat-sidebar .textarea {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 .chat-sidebar .seen {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 .chat-sidebar.is-active {
   right: 0;
@@ -1120,7 +1122,7 @@ a.dt-button.active:not(.disabled) {
   margin-bottom: 15px;
 }
 .testimonial-widget-one .testimonial-author-position {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
   margin-right: 75px;
   position: relative;
   top: -5px;
@@ -1863,7 +1865,7 @@ footer p {
   right: 0;
   top: 0;
   color: #373757;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 12px;
 }
 .comment-action {
@@ -1871,7 +1873,7 @@ footer p {
 }
 .comment-action .badge {
   text-transform: uppercase;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 .comment-action i {
   padding: 0 5px;
@@ -1918,7 +1920,7 @@ footer p {
   border-radius: 0px;
   box-shadow: none;
   border-color: #e7e7e7;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 .form-control:hover {
   box-shadow: none;
@@ -2216,7 +2218,7 @@ ul.inbox-nav li a {
   line-height: 45px;
   padding: 0 20px;
   width: 100%;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 ul.inbox-nav li a:hover {
   background: #eef5f9;
@@ -2255,7 +2257,7 @@ ul.labels-info li h4 {
 ul.labels-info li a {
   border-radius: 0;
   color: #6a6a6a;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 ul.labels-info li a:hover {
   background: #eef5f9;
@@ -2357,7 +2359,7 @@ ul.inbox-pagination li {
   background: #ffffff;
   border: 1px solid #e7e7e7;
   border-radius: 3px !important;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
   color: #373757;
   display: inline-block;
   padding: 5px 10px;
@@ -2615,7 +2617,7 @@ ul {
 }
 .tdl-holder li span {
   margin-left: 30px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
   vertical-align: middle;
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
@@ -2690,7 +2692,7 @@ ul {
 }
 .datamap-sales-hover-tooltip {
   background: #545454;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
   padding: 5px 10px;
   color: #ffffff;
   font-weight: 400;
@@ -2707,11 +2709,11 @@ thead tr th:last-child {
 }
 tbody tr th {
   color: #373757;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: normal;
 }
 tbody tr td {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
   color: #868e96;
 }
 tbody tr td:last-child {
@@ -2891,7 +2893,7 @@ tbody tr td:last-child {
   margin-bottom: 15px;
   padding: 5px 0px;
   border-bottom: 1px solid #e7e7e7;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 .work-content {
   margin-bottom: 15px;
@@ -2913,7 +2915,7 @@ tbody tr td:last-child {
   display: inline-block;
   font-size: 12px;
   margin-left: 10px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 .user-Location i {
   font-size: 14px;
@@ -2959,7 +2961,7 @@ tbody tr td:last-child {
   text-transform: uppercase;
   padding-top: 10px;
   padding-bottom: 15px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 .contact-title {
   display: inline-block;
@@ -2975,7 +2977,7 @@ tbody tr td:last-child {
 .contact-skype,
 .birth-date,
 .gender {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
   color: #373757;
 }
@@ -3665,7 +3667,7 @@ tbody tr td:last-child {
   fill: #e6a1f2;
 }
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
   background: rgba(88, 115, 254, 0.04);
   color: #868e96;
   font-size: 14px;
@@ -3695,7 +3697,7 @@ li {
   list-style: none;
 }
 p {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
   color: #868e96;
 }
 .h2,

@@ -51,13 +51,6 @@ if($_SESSION['auth_user']['student_id']==0){
     <link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" rel="stylesheet">
     <!----------------------CAMERA---------------------------->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
-
-    <style>
-        /* Flip the video feed horizontally */
-        #my_camera {
-            transform: scaleX(-1);
-        }
-    </style>
 </head>
 
 <body>
@@ -122,7 +115,7 @@ require_once 'templates/stud_navbar.php';
                     <input type="hidden" name="image" class="image-tag">
                 </form>
 <br><br>
-
+<div id="Time" class="tabpane" style="overflow: auto;">
     <table id="datatablessss" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
@@ -174,9 +167,7 @@ if (isset($_SESSION['auth_user']['student_id'])) {
             </tr>
         </tfoot>
     </table>
-
-
-
+</div>
                 <!-- /# row -->
                 <section id="main-content">
                     <div class="row">

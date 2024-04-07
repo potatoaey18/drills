@@ -91,7 +91,7 @@ require_once 'templates/stud_navbar.php';
                 </div>
 
 <br><br>
-
+<div id="Time" class="tabpane" style="overflow: auto;">
     <table id="datatablessss" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
@@ -143,6 +143,7 @@ if (isset($_SESSION['auth_user']['student_id'])) {
             </tr>
         </tfoot>
     </table>
+</div>
 
 
 

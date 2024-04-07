@@ -6,11 +6,19 @@ error_reporting(0);
 session_start();
 
 if($_SESSION['auth_user']['coordinators_id']==0){
-    echo"<script>window.location.href='index.php'</script>";
-    
+    echo"<script>window.location.href='index.php'</script>"; 
+}else {
+    // Assuming you have a variable $conn which is your database connection
+    $faculty_id = $_SESSION['auth_user']['coordinators_id'];
+    $query = "SELECT first_name FROM coordinators_account WHERE id = :faculty_id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':faculty_id', $faculty_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $first_name = isset($result['first_name']) ? $result['first_name'] : "Guest";
 }
-
 ?>
+
 
 
 
@@ -65,7 +73,7 @@ require_once 'templates/coordinators_navbar.php';
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>Hello, <span>Welcome Coordinator</span></h1>
+                                <h1>Hello, <span style="font-size: 18px; color: black;"><?php echo htmlspecialchars($first_name); ?></span></h1>
                             </div>
                         </div>
                     </div>

@@ -8,8 +8,16 @@ session_start();
 if($_SESSION['auth_user']['admin_id']==0){
     echo"<script>window.location.href='index.php'</script>";
     
+}else {
+    // Assuming you have a variable $conn which is your database connection
+    $admin_id = $_SESSION['auth_user']['admin_id'];
+    $query = "SELECT first_name FROM admin_account WHERE id = :admin_id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':admin_id', $admin_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $first_name = isset($result['first_name']) ? $result['first_name'] : "Guest";
 }
-
 ?>
 
 
@@ -65,7 +73,7 @@ require_once 'templates/admin_navbar.php';
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>Hello, <span>Welcome Admin</span></h1>
+                                <h1>Welcome back, <span style="font-size: 18px; color: black;"><?php echo htmlspecialchars($first_name); ?></span></h1>
                             </div>
                         </div>
                     </div>
@@ -501,16 +509,30 @@ $counts = array_column($rows, 'count');
 
                         ]
 		},
-		options: {
-			scales: {
-				yAxes: [ {
-					ticks: {
-						beginAtZero: true
-					}
-                                } ]
-			}
-		}
-	} );
+        options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            xAxes: [{
+                ticks: {
+                    autoSkip: false,
+                    maxRotation: 90,
+                    minRotation: 45,
+                    callback: function(value, index, values) {
+                        // Change font size based on window width
+                        var fontSize = window.innerWidth < 512 ? 10 : 14;
+                        return Chart.helpers.isArray(value) ? value.join(' ') : value;
+                    }
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
 
     <?php
 

@@ -92,7 +92,7 @@ require_once 'templates/stud_navbar.php';
                     </div>
                     <!-- /# column -->
                 </div>
-
+<div id="Time" class="tabpane" style="overflow: auto;">
                 <table id="datatablesss" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
@@ -141,7 +141,7 @@ require_once 'templates/stud_navbar.php';
             </tr>
         </tfoot>
     </table>
-
+</div>
 
                 <!-- /# row -->
                 <section id="main-content">
