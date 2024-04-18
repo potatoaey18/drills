@@ -1,7 +1,9 @@
 <?php
 
 include '../connection/config.php';
-error_reporting(0);
+//display all errors
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 session_start();
 

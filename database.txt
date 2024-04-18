@@ -1,4 +1,0 @@
-$servername = "sql310.infinityfree.com";
-$username = "if0_35980840";
-$password = "a2FS0qbbGI4Q";
-$database = "if0_35980840_ojtwebportal";
