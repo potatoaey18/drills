@@ -314,8 +314,8 @@ if(isset($_SESSION['auth_user']['student_id'])){
                             <div id="extra-area-chart"></div>
                             <div id="morris-line-chart"></div>
                             <div class="footer">
-                                <p>2024 © Admin Board. -
-                                    <a href="#">example.com</a>
+                                <p>2024 © BulSU -
+                                    <a href="#">Mabuhay</a>
                                 </p>
                             </div>
                         </div>

@@ -201,8 +201,8 @@ if(isset($_GET['supervisor_id'])){
           <div class="row">
             <div class="col-lg-12">
               <div class="footer">
-                <p>2018 © Admin Board. -
-                  <a href="#">example.com</a>
+                <p>2024 © BulSU -
+                  <a href="#">Mabuhay</a>
                 </p>
               </div>
             </div>

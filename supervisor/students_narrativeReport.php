@@ -92,7 +92,7 @@ require_once 'templates/coordinators_navbar.php';
                     </div>
                     <!-- /# column -->
                 </div>
-
+                <div id="Time" class="tabpane" style="overflow: auto;">
                 <table id="datatablesss" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
@@ -135,6 +135,7 @@ require_once 'templates/coordinators_navbar.php';
             </tr>
         </tfoot>
     </table>
+                </div>
 
 
                 <!-- /# row -->
@@ -144,8 +145,8 @@ require_once 'templates/coordinators_navbar.php';
                             <div id="extra-area-chart"></div>
                             <div id="morris-line-chart"></div>
                             <div class="footer">
-                                <p>2018 © Admin Board. -
-                                    <a href="#">example.com</a>
+                                <p>2024 © BulSU -
+                                    <a href="#">Mabuhay</a>
                                 </p>
                             </div>
                         </div>

@@ -22,9 +22,9 @@
                     <li><a class="sidebar-sub-toggle"><i class="ti-comment-alt"></i> Chats <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                         <ul>
                             <li><a href="stud_message.php">Chat Students</a></li>
-                            <li><a href="coordinator_studMESSAGE.php">Chat Coordinator</a></li>
-                            <li><a href="chat_supervisor.php">Chat Supervisor</a></li>
-                            <li><a href="chat_admin.php">Chat Admin</a></li>
+                            <li><a href="coordinator_studMESSAGE.php">Chat OJT Coordinators</a></li>
+                            <li><a href="chat_supervisor.php">Chat HTE Coordinators</a></li>
+                            <li><a href="chat_admin.php">Chat SIP Coordinators</a></li>
                             
 
                         </ul>

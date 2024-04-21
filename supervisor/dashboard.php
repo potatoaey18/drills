@@ -73,7 +73,7 @@ require_once 'templates/supervisor_navbar.php';
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>Hello, <span style="font-size: 18px; color: black;"><?php echo htmlspecialchars($first_name); ?></span></h1>
+                                <h1 style="color: blue;">Hello, <span style="font-size: 18px; color: black;"><?php echo htmlspecialchars($first_name); ?></span></h1>
                             </div>
                         </div>
                     </div>
@@ -231,7 +231,7 @@ require_once 'templates/supervisor_navbar.php';
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="footer">
-                                <p>2018 © Admin Board. - <a href="#">example.com</a></p>
+                                <p>2024 © BulSU - <a href="#">Mabuhay</a></p>
                             </div>
                         </div>
                     </div>
@@ -455,16 +455,30 @@ require_once 'templates/supervisor_navbar.php';
 
                         ]
 		},
-		options: {
-			scales: {
-				yAxes: [ {
-					ticks: {
-						beginAtZero: true
-					}
-                                } ]
-			}
-		}
-	} );
+        options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            xAxes: [{
+                ticks: {
+                    autoSkip: false,
+                    maxRotation: 90,
+                    minRotation: 45,
+                    callback: function(value, index, values) {
+                        // Change font size based on window width
+                        var fontSize = window.innerWidth < 512 ? 10 : 14;
+                        return Chart.helpers.isArray(value) ? value.join(' ') : value;
+                    }
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
 
 
 

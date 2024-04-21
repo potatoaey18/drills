@@ -16,9 +16,9 @@
 
                     <li><a class="sidebar-sub-toggle"><i class="ti-comment-alt"></i> Chats <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                         <ul>
-                            <li><a href="supervisor_stud_message.php">Chat Trainees</a></li>
-                            <li><a href="chat_coordinator.php">Chat Coordinator</a></li>
-                            <li><a href="chat_admin.php">Chat Admin</a></li>
+                            <li><a href="supervisor_stud_message.php">Chat Studnets</a></li>
+                            <li><a href="chat_coordinator.php">Chat OJT Coordinator</a></li>
+                            <li><a href="chat_admin.php">Chat SIP Coordinator</a></li>
                             
 
                         </ul>

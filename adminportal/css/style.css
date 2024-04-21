@@ -875,8 +875,6 @@ a.dt-button.active:not(.disabled) {
   padding: 0 15px;
   border-bottom: 0;
   border-radius: 3px;
-  background-color: #e0ebf9;
-  border-color: #e0ebf9;
 }
 .main .page-header h1 {
   font-size: 18px;

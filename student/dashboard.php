@@ -73,7 +73,7 @@ require_once 'templates/stud_navbar.php';
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>Hello, <span style="font-size: 18px; color: black;"><?php echo htmlspecialchars($first_name); ?></span></h1>
+                                <h1 style="color: blue;">Hello, <span style="font-size: 18px; color: black;"><?php echo htmlspecialchars($first_name); ?></span></h1>
                             </div>
                         </div>
                     </div>

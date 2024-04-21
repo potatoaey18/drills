@@ -152,7 +152,7 @@ require_once 'templates/supervisor_navbar.php';
                     <!-- /# column -->
                 </div>
                 
-
+                <div id="Time" class="tabpane" style="overflow: auto;">
     <table id="datatablessss" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
@@ -265,6 +265,7 @@ if (isset($_GET['student_ID'])) {
             </tr>
         </tfoot>
     </table>
+                </div>
 
 
 
@@ -275,8 +276,8 @@ if (isset($_GET['student_ID'])) {
                             <div id="extra-area-chart"></div>
                             <div id="morris-line-chart"></div>
                             <div class="footer">
-                                <p>2018 © Admin Board. -
-                                    <a href="#">example.com</a>
+                                <p>2024 © BulSU -
+                                    <a href="#">Mabuhay</a>
                                 </p>
                             </div>
                         </div>
