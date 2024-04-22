@@ -16,6 +16,7 @@ error_reporting(0);
 			while ($data = $stmt->fetch(PDO::FETCH_ASSOC)) {
 						$admin_id = $data['id'];
 						$admin_UNIQUEid = $data['uniqueID'];
+						$coordinator_course_handled = $data['position'];
                         $pword = $data['admin_password'];
 						$verifystatus = $data['verify_status'];
 					}
@@ -25,6 +26,7 @@ error_reporting(0);
 
 						'admin_id' => $admin_id,
 						'admin_uniqueID' => $admin_UNIQUEid,
+						'coordinator_courseHANDLED' => $coordinator_course_handled,
 					];
 
 

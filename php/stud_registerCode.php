@@ -21,6 +21,7 @@ if (isset($_POST['register'])) {
     $middle_name = $_POST['m_name'];
     $last_name = $_POST['l_name'];
     $student_id = $_POST['student_id'];
+    $student_dept = $_POST['student_dept'];
     $student_course = $_POST['student_course'];
     $student_section = $_POST['student_section'];
     $CompleteAddress = $_POST['C_address'];
@@ -74,9 +75,9 @@ if (isset($_POST['register'])) {
         // Move the uploaded image to the desired directory
         if (move_uploaded_file($_FILES['stud_pic']['tmp_name'], $imagePath)) {
 
-            $sql = $conn->prepare("INSERT INTO students_data(uniqueID, first_name, middle_name, last_name, student_ID, stud_course, stud_section, 
-            complete_address, stud_gender, phone_number, stud_email, stud_password, guardians_name, guardians_cpNumber, profile_picture, verification_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $sql->execute([$uniqueId, $first_name, $middle_name, $last_name, $student_id, $student_course, $student_section,
+            $sql = $conn->prepare("INSERT INTO students_data(uniqueID, first_name, middle_name, last_name, student_ID, stud_dept, stud_course, stud_section, 
+            complete_address, stud_gender, phone_number, stud_email, stud_password, guardians_name, guardians_cpNumber, profile_picture, verification_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $sql->execute([$uniqueId, $first_name, $middle_name, $last_name, $student_id, $student_dept, $student_course, $student_section,
             $CompleteAddress, $gender, $PhoneNumber, $email, $pword, $guardians_name, $guardians_cpNumber,  $imagePath, $verification_code]);
 
             $mail = new PHPMailer(true);

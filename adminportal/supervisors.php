@@ -97,49 +97,37 @@ require_once 'templates/admin_navbar.php';
             <th>Full Name</th>
             <th>Company</th>
             <th>Company Address</th>
-            <th>Trainee Handled</th>
+            <th>Company Number</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
         <?php
-        $stmt = $conn->prepare("SELECT *, students_data.first_name AS stud_Fname, students_data.middle_name AS stud_Mname, students_data.last_name AS stud_Lname, 
-        supervisor.id AS supervisor_id, supervisor.first_name AS supervisor_fname, supervisor.middle_name AS supervisor_mname, supervisor.last_name AS supervisor_lname FROM supervisor 
-        LEFT JOIN deployed_students ON deployed_students.company_name = supervisor.company_name 
-        LEFT JOIN students_data ON students_data.id = deployed_students.student_id");
-        $stmt->execute();
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // Assuming only one supervisor
-        $handledStudents = '';
-
+                $stmt = $conn->prepare("SELECT supervisor.id AS supervisor_id, supervisor.first_name AS supervisor_fname, supervisor.middle_name AS supervisor_mname, supervisor.last_name AS supervisor_lname, supervisor.company_name, supervisor.company_address, supervisor.phone_number FROM supervisor");
+                $stmt->execute();
+                $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                
         foreach ($data as $result) {
-            $supervisorFullName = $result['supervisor_fname'] . ' ' . $result['supervisor_mname'] . ' ' . $result['supervisor_lname'];
-            $studentFullName = $result['stud_Fname'] . ' ' . $result['stud_Mname'] . ' ' . $result['stud_Lname'];
-
-            if ($handledStudents === '') {
-                $handledStudents = $studentFullName;
-            } else {
-                $handledStudents .= ', ' . $studentFullName;
-            }
+            ?>
+                        <tr>
+                <td><?= $result['supervisor_fname'] . ' ' . $result['supervisor_mname'] . ' ' . $result['supervisor_lname'] ?></td>
+                <td><?= $result['company_name'] ?></td>
+                <td><?= $result['company_address'] ?></td>
+                <td><?= $result['phone_number'] ?></td>
+                <td>
+                    <a href="view_supervisor_profile.php?supervisor_id=<?= $result['supervisor_id'] ?>" class="btn btn-primary">View Profile</a>
+                </td>
+            </tr>
+            <?php
         }
         ?>
-        <tr>
-            <td><?= $supervisorFullName ?></td>
-            <td><?= $result['company_name'] ?></td>
-            <td><?= $result['company_address'] ?></td>
-            <td><?= $handledStudents ?></td>
-            <td>
-                <a href="view_supervisor_profile.php?supervisor_id=<?= $result['supervisor_id'] ?>" class="btn btn-primary">View Profile</a>
-            </td>
-        </tr>
     </tbody>
     <tfoot>
         <tr>
-            <th>Full Name</th>
+        <th>Full Name</th>
             <th>Company</th>
             <th>Company Address</th>
-            <th>Trainee Handled</th>
+            <th>Company Number</th>
             <th>Action</th>
         </tr>
     </tfoot>

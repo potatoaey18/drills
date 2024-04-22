@@ -107,24 +107,17 @@ require_once 'templates/admin_navbar.php';
         </thead>
         <tbody>
             <?php
-
-                $stmt = $conn->prepare("SELECT students_data.*, deployed_students.company_name AS deployedCompany, supervisor.company_name AS partnerCompanyName, supervisor.company_address, supervisor.phone_number FROM students_data LEFT JOIN deployed_students ON students_data.id = deployed_students.student_id LEFT JOIN supervisor ON supervisor.company_name = deployed_students.company_name");
-                $stmt->execute();
+                $course_handled = $_SESSION['auth_user']['coordinator_courseHANDLED'];
+                $stmt = $conn->prepare("SELECT students_data.*, deployed_students.company_name AS deployedCompany, supervisor.company_name AS partnerCompanyName, supervisor.company_address, supervisor.phone_number FROM students_data LEFT JOIN deployed_students ON students_data.id = deployed_students.student_id LEFT JOIN supervisor ON supervisor.company_name = deployed_students.company_name WHERE students_data.stud_dept = ?");
+                $stmt->execute([$course_handled]);
                 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 foreach ($data as $result) {
-                    // Determine the suffix based on the course
-                    $courseSuffix = '';
-                    if ($result['stud_course'] == 'Bachelor of Science in Electronics Engineering') {
-                        $courseSuffix = ' - ECE';
-                    } elseif ($result['stud_course'] == 'Bachelor of Science in Information Technology') {
-                        $courseSuffix = ' - IT';
-                    }
                 ?>
             <tr>
                 <td><?= $result['student_ID'] ?></td>
                 <td><?= $result['first_name'] ?> <?= $result['middle_name'] ?> <?= $result['last_name'] ?></td>
-                <td><?= $result['stud_section'] . $courseSuffix ?></td>
+                <td><?= $result['stud_section'] ?></td>
                 <td><?= $result['stud_course'] ?></td>
                 <td><?= $result['ojt_status'] ?></td>
                 <td><?= $result['deployedCompany'] ?></td>

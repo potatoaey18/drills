@@ -104,13 +104,12 @@ require_once 'templates/coordinators_navbar.php';
         </thead>
         <tbody>
     <?php
-    $stmt = $conn->prepare("SELECT *, supervisor.id AS supervisorID, GROUP_CONCAT(company_skills_requirements.skills_name) AS skills FROM supervisor LEFT JOIN company_skills_requirements ON supervisor.company_name = company_skills_requirements.company_name GROUP BY supervisor.id");
+    $stmt = $conn->prepare("SELECT supervisor.id AS supervisorID, supervisor.company_name, supervisor.company_address, GROUP_CONCAT(company_skills_requirements.skills_name) AS skills FROM supervisor LEFT JOIN company_skills_requirements ON supervisor.company_name = company_skills_requirements.company_name GROUP BY supervisor.id");
     $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($data as $result) {
-        $skills = $result['skills'] ? implode(', ', explode(',', $result['skills'])) : '';
-
+        $skills = $result['skills'] ? implode(', ', explode(',', $result['skills'])) : 'No skills found.';
         ?>
         <tr>
             <td><?= $result['company_name'] ?></td>

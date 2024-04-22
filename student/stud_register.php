@@ -19,6 +19,7 @@ session_start();
     <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     <link href="css/lib/sweetalert/sweetalert.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -53,27 +54,31 @@ session_start();
                   <label for="text-743c" class="u-label">Last</label>
                   <input type="text" placeholder="Last Name" id="text-743c" name="l_name" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-3" required="true">
                 </div>
-                <div class="u-form-group u-form-partition-factor-3 u-label-none u-form-group-4">
+                <div class="u-form-group u-form-partition-factor-4 u-label-none u-form-group-4">
                   <label for="text-7a3c" class="u-label">Student ID</label>
                   <input type="text" placeholder="Student ID" id="text-7a3c" name="student_id" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-4" required="true">
                 </div>
-                <div class="u-form-group u-form-partition-factor-3 u-form-select u-label-none u-form-group-5">
+                <div class="u-form-group u-form-partition-factor-4 u-label-none u-form-group-4">
+                  <label for="select-f65c" class="u-label">Department</label>
+                  <div class="u-form-select-wrapper">
+                    <select id="select-f65c" name="student_dept" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-5" required="true">
+                      <option value="">Department</option>
+                      <option value="College of Engineering">College of Engineering</option>
+                      <option value="College of Education">College of Education</option>
+                      <option value="College of Arts">College of Arts</option>
+                      <option value="College of Science">College of Science</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="u-form-group u-form-partition-factor-4 u-form-select u-label-none u-form-group-5">
                   <label for="select-f65c" class="u-label">Course</label>
                   <div class="u-form-select-wrapper">
                     <select id="select-f65c" name="student_course" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-5" required="true">
-                      <option value="">Student Course</option>
-                      <option value="Bachelor of Science in Civil Engineering">Bachelor of Science in Civil Engineering</option>
-                      <option value="Bachelor of Science in Computer Engineering">Bachelor of Science in Computer Engineering</option>
-                      <option value="Bachelor of Science in Electrical Engineering">Bachelor of Science in Electrical Engineering</option>
-                      <option value="Bachelor of Science in Electronics Engineering">Bachelor of Science in Electronics Engineering</option>
-                      <option value="Bachelor of Science in Industrial Engineering">Bachelor of Science in Industrial Engineering</option>
-                      <option value="Bachelor of Science in Manufacturing Engineering">Bachelor of Science in Manufacturing Engineering</option>
-                      <option value="Bachelor of Science in Mechanical Engineering">Bachelor of Science in Mechanical Engineering</option>
-                      <option value="Bachelor of Science in Mechatronics Engineering">Bachelor of Science in Mechatronics Engineering</option>
+                      <option value="">Course</option>
                     </select>
                     </div>
                 </div>
-                <div class="u-form-group u-form-partition-factor-3 u-label-none u-form-group-6">
+                <div class="u-form-group u-form-partition-factor-4 u-label-none u-form-group-6">
                   <label for="text-bb89" class="u-label">Section</label>
                   <input type="text" placeholder="Section" id="text-bb89" name="student_section" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-6" required="true">
                 </div>
@@ -99,7 +104,7 @@ session_start();
                 </div>
                 <div class="u-form-group u-form-partition-factor-3 u-label-none u-form-group-12">
                   <label for="text-5809" class="u-label">Repeat Password</label>
-                  <input type="text" placeholder="Repeat Password" id="text-5809" name="cpword" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-12" required="true">
+                  <input type="password" placeholder="Repeat Password" id="text-5809" name="cpword" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-12" required="true">
                 </div>
                 <div class="u-form-group u-form-partition-factor-2 u-label-none u-form-group-13">
                   <label for="text-13e6" class="u-label">Guardians Name</label>
@@ -144,4 +149,55 @@ unset($_SESSION['status']);
 }
 ?>
   
+  <script>
+$(document).ready(function() {
+    $('#select-f65c').change(function() {
+        var selectedDepartment = $(this).val();
+        var courseSelect = $('select[name="student_course"]');
+
+        // Clear the course options
+        courseSelect.empty();
+
+        // Add a default option
+        courseSelect.append('<option value="">Course</option>');
+
+        if (selectedDepartment === 'College of Education') {
+            courseSelect.append('<option value="Bachelor of Elementary Education">Bachelor of Elementary Education</option>');
+            courseSelect.append('<option value="Bachelor of Early Childhood Education">Bachelor of Early Childhood Education</option>');
+            courseSelect.append('<option value="Bachelor of Secondary Education Major in English minor in Mandarin">Bachelor of Secondary Education Major in English minor in Mandarin</option>');
+            courseSelect.append('<option value="Bachelor of Secondary Education Major in Filipino">Bachelor of Secondary Education Major in Filipino</option>');
+            courseSelect.append('<option value="Bachelor of Secondary Education Major in Sciences">Bachelor of Secondary Education Major in Sciences</option>');
+            courseSelect.append('<option value="Bachelor of Secondary Education Major in Mathematics">Bachelor of Secondary Education Major in Mathematics</option>');
+            courseSelect.append('<option value="Bachelor of Secondary Education Major in Social Studies">Bachelor of Secondary Education Major in Social Studies</option>');
+            courseSelect.append('<option value="Bachelor of Secondary Education Major in Values Education">Bachelor of Secondary Education Major in Values Education</option>');
+            courseSelect.append('<option value="Bachelor of Physical Education">Bachelor of Physical Education</option>');
+            courseSelect.append('<option value="Bachelor of Technology and Livelihood Education Major in Industrial Arts">Bachelor of Technology and Livelihood Education Major in Industrial Arts</option>');
+            courseSelect.append('<option value="Bachelor of Technology and Livelihood Education Major in Information and Communication Technology">Bachelor of Technology and Livelihood Education Major in Information and Communication Technology</option>');
+            courseSelect.append('<option value="Bachelor of Technology and Livelihood Education Major in Home Economics">Bachelor of Technology and Livelihood Education Major in Home Economics</option>');
+        } else if (selectedDepartment === 'College of Engineering') {
+            courseSelect.append('<option value="Bachelor of Science in Civil Engineering">Bachelor of Science in Civil Engineering</option>');
+            courseSelect.append('<option value="Bachelor of Science in Computer Engineering">Bachelor of Science in Computer Engineering</option>');
+            courseSelect.append('<option value="Bachelor of Science in Electrical Engineering">Bachelor of Science in Electrical Engineering</option>');
+            courseSelect.append('<option value="Bachelor of Science in Electronics Engineering">Bachelor of Science in Electronics Engineering</option>');
+            courseSelect.append('<option value="Bachelor of Science in Industrial Engineering">Bachelor of Science in Industrial Engineering</option>');
+            courseSelect.append('<option value="Bachelor of Science in Manufacturing Engineering">Bachelor of Science in Manufacturing Engineering</option>');
+            courseSelect.append('<option value="Bachelor of Science in Mechanical Engineering">Bachelor of Science in Mechanical Engineering</option>');
+            courseSelect.append('<option value="Bachelor of Science in Mechatronics Engineering">Bachelor of Science in Mechatronics Engineering</option>');
+        } else if (selectedDepartment === 'College of Science') {
+            courseSelect.append('<option value="Bachelor of Science in Environmental Science">Bachelor of Science in Environmental Science</option>');
+            courseSelect.append('<option value="Bachelor of Science in Food Technology">Bachelor of Science in Food Technology</option>');
+            courseSelect.append('<option value="Bachelor of Science in Math with Specialization in Computer Science">Bachelor of Science in Math with Specialization in Computer Science</option>');
+            courseSelect.append('<option value="Bachelor of Science in Math with Specialization in Applied Statistics">Bachelor of Science in Math with Specialization in Applied Statistics</option>');
+            courseSelect.append('<option value="Bachelor of Science in Math with Specialization in Business Applications">Bachelor of Science in Math with Specialization in Business Applications</option>');
+        } else if (selectedDepartment === 'College of Arts') {
+            courseSelect.append('<option value="Bachelor of Arts in Broadcasting">Bachelor of Arts in Broadcasting</option>');
+            courseSelect.append('<option value="Bachelor of Arts in Journalism">Bachelor of Arts in Journalism</option>');
+            courseSelect.append('<option value="Bachelor of Performing Arts (Theater Track)">Bachelor of Performing Arts (Theater Track)</option>');
+            courseSelect.append('<option value="Batsilyer ng Sining sa Malikhaing Pagsulat">Batsilyer ng Sining sa Malikhaing Pagsulat</option>');
+        } else {
+        }
+    });
+});
+</script>
+
 </body></html>

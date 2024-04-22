@@ -102,9 +102,9 @@ require_once 'templates/admin_navbar.php';
         </thead>
         <tbody>
             <?php
-
-            $stmt = $conn->prepare("SELECT * FROM coordinators_account");
-            $stmt->execute();
+            $course_handled = $_SESSION['auth_user']['coordinator_courseHANDLED'];
+            $stmt = $conn->prepare("SELECT * FROM coordinators_account WHERE coor_dept = ?");
+            $stmt->execute([$course_handled]);
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             foreach ($data as $result) {

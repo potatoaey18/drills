@@ -101,9 +101,10 @@ require_once 'templates/admin_navbar.php';
                                     <div class="stat-content dib">
                                         <div class="stat-text">Trainees</div>
                                         <?php
+                                        $course_handled = $_SESSION['auth_user']['coordinator_courseHANDLED'];
             
-                                        $stmt = $conn->prepare("SELECT COUNT(*) FROM students_data");
-                                        $stmt->execute();
+                                        $stmt = $conn->prepare("SELECT COUNT(*) FROM students_data WHERE stud_dept = ?");
+                                        $stmt->execute([$course_handled]);
                                         
                                         $count = $stmt->fetchColumn(); // Fetch the count
                                         ?>
@@ -121,9 +122,9 @@ require_once 'templates/admin_navbar.php';
                                     <div class="stat-content dib">
                                         <div class="stat-text">Coordinators</div>
                                         <?php
-
-                                        $stmt = $conn->prepare("SELECT COUNT(*) FROM coordinators_account");
-                                        $stmt->execute();
+                                        $course_handled = $_SESSION['auth_user']['coordinator_courseHANDLED'];
+                                        $stmt = $conn->prepare("SELECT COUNT(*) FROM coordinators_account WHERE coor_dept = ?");
+                                        $stmt->execute([$course_handled]);
                                         $count = $stmt->fetchColumn(); // Fetch the count  
                                         
 
@@ -256,11 +257,12 @@ require_once 'templates/admin_navbar.php';
                         </div>
                         <div class="sales-chart">
                             <?php
-                            
+                            $course_handled = $_SESSION['auth_user']['coordinator_courseHANDLED'];
+                        
 
                             $stmt = $conn->prepare("SELECT comments_suggestions FROM stud_evaluation
-                            LEFT JOIN students_data ON students_data.id = stud_evaluation.stud_id");
-                            $stmt->execute();
+                            LEFT JOIN students_data ON students_data.id = stud_evaluation.stud_id WHERE students_data.stud_dept = ?");
+                            $stmt->execute([$course_handled]);
 
                             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             
@@ -343,9 +345,10 @@ require_once 'templates/admin_navbar.php';
     <script src="js/lib/sweetalert/sweetalert.init.js"></script>
 
     <?php
+$course_handled = $_SESSION['auth_user']['coordinator_courseHANDLED'];
 
-$stmt = $conn->prepare("SELECT stud_course, COUNT(*) as count FROM students_data GROUP BY stud_course");
-$stmt->execute();
+$stmt = $conn->prepare("SELECT stud_course, COUNT(*) as count FROM students_data WHERE stud_dept= ? GROUP BY stud_course");
+$stmt->execute([$course_handled]);
 
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -401,14 +404,14 @@ $counts = array_column($rows, 'count');
 	} );
 
     <?php
-    
+    $course_handled = $_SESSION['auth_user']['coordinator_courseHANDLED'];
 
     $stmt = $conn->prepare("SELECT week, AVG(job_knowledge) as job_knowledgeAVG, AVG(dependability) as dependabilityAVG,
     AVG(communication_skills) as communication_skillsAVG, AVG(conduct) as conductAVG, AVG(initiative_and_creativity) as initiative_and_creativityAVG, 
     AVG(cooperatives_and_relationship) as cooperatives_and_relationshipAVG, 
     AVG(attendance_and_punctuality) as attendance_and_punctualityAVG FROM stud_evaluation LEFT JOIN students_data ON students_data.id = stud_evaluation.stud_id
-    GROUP BY week");
-    $stmt->execute();
+    WHERE students_data.stud_dept = ? GROUP BY week");
+    $stmt->execute([$course_handled]);
 
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -588,10 +591,11 @@ $counts = array_column($rows, 'count');
 
 
     <?php
+     $course_handled = $_SESSION['auth_user']['coordinator_courseHANDLED'];
 
     $stmt = $conn->prepare("SELECT AVG(total_points) as total_pointsAVG FROM stud_evaluation
-    LEFT JOIN students_data ON students_data.id = stud_evaluation.stud_id");
-    $stmt->execute();
+    LEFT JOIN students_data ON students_data.id = stud_evaluation.stud_id WHERE students_data.stud_dept = ?");
+    $stmt->execute([$course_handled]);
 
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -634,10 +638,11 @@ $counts = array_column($rows, 'count');
 
 
     <?php
+    $course_handled = $_SESSION['auth_user']['coordinator_courseHANDLED'];
 
     $stmt = $conn->prepare("SELECT total_points FROM stud_evaluation
-        LEFT JOIN students_data ON students_data.id = stud_evaluation.stud_id");
-    $stmt->execute();
+        LEFT JOIN students_data ON students_data.id = stud_evaluation.stud_id WHERE students_data.stud_dept = ?");
+    $stmt->execute([$course_handled]);
 
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -681,12 +686,13 @@ var labels = <?= json_encode($labels) ?>;
     });
 
     <?php
+    $course_handled = $_SESSION['auth_user']['coordinator_courseHANDLED'];
     
     $task_status = 'Finished';
 
     $stmt = $conn->prepare("SELECT COUNT(task_status) AS finished_tasks FROM stud_task_list
-    LEFT JOIN students_data ON students_data.id = stud_task_list.stud_id WHERE stud_task_list.task_status = ?");
-    $stmt->execute([$task_status]);
+    LEFT JOIN students_data ON students_data.id = stud_task_list.stud_id WHERE students_data.stud_dept = ? AND stud_task_list.task_status = ?");
+    $stmt->execute([$course_handled, $task_status]);
 
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

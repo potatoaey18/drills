@@ -61,8 +61,16 @@ session_start();
                   <input type="text" placeholder="ID Number" id="text-7a3c" name="id_number" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-4" required="true">
                 </div>
                 <div class="u-form-group u-form-partition-factor-3 u-label-none u-form-group-5">
-                  <label for="text-bb89" class="u-label">Position</label>
-                  <input type="text" placeholder="Position" id="text-bb89" name="position" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-5" required="true">
+                  <label for="text-bb89" class="u-label">Department</label>
+                  <div class="u-form-select-wrapper">
+                    <select id="select-f65c" name="position" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-5" required="true">
+                      <option value="">Department</option>
+                      <option value="College of Engineering">College of Engineering</option>
+                      <option value="College of Education">College of Education</option>
+                      <option value="College of Arts">College of Arts</option>
+                      <option value="College of Science">College of Science</option>
+                    </select>
+                  </div>
                 </div>
                 <div class="u-form-group u-form-partition-factor-3 u-label-none u-form-group-6">
                   <label for="text-63ba" class="u-label">Complete Address</label>
