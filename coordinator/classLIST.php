@@ -242,8 +242,8 @@ require_once 'templates/coordinators_navbar.php';
                                 </div>
                                 <form action="" method="POST">
                                     <input type="hidden" name="student_ID" value="<?= $result['id'] ?>">
-                                <div class="modal-body">
-                                    Are you sure the student completed his/her hours?
+                                <div class="modal-body text-center">
+                                    <p>Are you sure the student completed his/her hours?
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -266,7 +266,7 @@ require_once 'templates/coordinators_navbar.php';
                                 </div>
                                 <form action="" method="POST">
                                     <input type="hidden" name="student_ID" value="<?= $result['id'] ?>">
-                                <div class="modal-body">
+                                <div class="modal-body text-center">
                                     Are you sure you want to drop the student?
                                 </div>
                                 <div class="modal-footer">
@@ -325,7 +325,8 @@ require_once 'templates/coordinators_navbar.php';
         <tfoot>
             <tr>
                 <th>ID Number</th>
-                <th>Full Name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th>Section</th>
                 <th>Status</th>
                 <th>Action</th>

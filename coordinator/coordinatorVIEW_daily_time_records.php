@@ -12,6 +12,56 @@ if($_SESSION['auth_user']['coordinators_id']==0){
     
 }
 
+if (ISSET($_POST['approve'])) {
+
+    $coordinator_id = $_SESSION['auth_user']['coordinators_id'];
+    $dtr_id = $_POST['dtr_id'];
+    $status = 'Approved';
+
+    date_default_timezone_set('Asia/Manila');
+    $date = date('F / d l / Y');
+    $time = date('g:i A');
+    $logs = 'You successfully APPROVED students Daily Time Record.';
+
+    $sql = $conn->prepare("UPDATE stud_daily_time_records SET recordStatus = ? WHERE id = ?");
+    $sql->execute([$status, $dtr_id]);
+
+    $sql1 = $conn->prepare("INSERT INTO coordinatorsystemnotification(coordinator_id, logs, logs_date, logs_time) VALUES (?, ?, ?, ?)");
+    $sql1->execute([$coordinator_id, $logs, $date, $time]);
+
+    
+
+        $_SESSION['alert'] = "Success...";
+        $_SESSION['status'] = "DTR Approved";
+        $_SESSION['status-code'] = "success";
+}
+
+
+if (ISSET($_POST['reject'])) {
+
+    $coordinator_id = $_SESSION['auth_user']['coordinators_id'];
+    $dtr_id = $_POST['dtr_id'];
+    $status = 'Rejected';
+
+    date_default_timezone_set('Asia/Manila');
+    $date = date('F / d l / Y');
+    $time = date('g:i A');
+    $logs = 'You successfully REJECTED students Daily Time Record.';
+
+    $sql = $conn->prepare("UPDATE stud_daily_time_records SET recordStatus = ? WHERE id = ?");
+    $sql->execute([$status, $dtr_id]);
+
+    $sql1 = $conn->prepare("INSERT INTO coordinatorsystemnotification(coordinator_id, logs, logs_date, logs_time) VALUES (?, ?, ?, ?)");
+    $sql1->execute([$coordinator_id, $logs, $date, $time]);
+
+    
+
+        $_SESSION['alert'] = "Success...";
+        $_SESSION['status'] = "DTR Rejected";
+        $_SESSION['status-code'] = "success";
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -110,6 +160,7 @@ require_once 'templates/coordinators_navbar.php';
                 <th class="text-center">P.M Time Out</th>
                 <th class="text-center">Total Working Hours</th>
                 <th class="text-center">Status</th>
+                <th class="text-center">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -131,6 +182,66 @@ if (isset($_GET['student_ID'])) {
             <td class="autofit"><?= $result['PM_time_OUT'] . '<br>' . '<img src="../student/'. $result['PM_time_OUT_pic'] . '" alt="PM Time Out Picture" width="300" height="300">'?></td>
             <td class="autofit"><?= $result['total_working_hours'] ?></td>
             <td class="autofit"><?= $result['recordStatus'] ?></td>
+            <td>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modelIdAPPROVE_<?= $result['id'] ?>"><i class="ti-check"></i></button>
+                
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modelIdREJECT_<?= $result['id'] ?>"><i class="ti-close"></i></button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="modelIdAPPROVE_<?= $result['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Approve Time In and Out</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+
+                            <form action="" method="POST">
+                            <input type="hidden" name="dtr_id" value="<?= $result['id'] ?>">
+                                <div class="modal-body text-center">
+                                    Are you sure you want to approve this attendance?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button name="approve" class="btn btn-success">Approve</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="modal fade" id="modelIdREJECT_<?= $result['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Reject Time In and Out</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+                            
+                            <form action="" method="POST">
+                            <input type="hidden" name="dtr_id" value="<?= $result['id'] ?>">
+                                <div class="modal-body text-center">
+                                    Are you sure you want to reject this attendance?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button name="reject" class="btn btn-danger">Reject</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </td>
         </tr>
 <?php
     }
@@ -147,6 +258,7 @@ if (isset($_GET['student_ID'])) {
                 <th>P.M Time Out</th>
                 <th>Total Working Hours</th>
                 <th>Status</th>
+                <th>Action</th>
             </tr>
         </tfoot>
     </table>

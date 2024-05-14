@@ -179,10 +179,10 @@ if (isset($_GET['student_ID'])) {
 ?>
         <tr>
             <td><?= $result['recordDate'] ?></td>
-            <td><?= $result['AM_time_IN'] ?></td>
-            <td><?= $result['AM_time_OUT'] ?></td>
-            <td><?= $result['PM_time_IN'] ?></td>
-            <td><?= $result['PM_time_OUT'] ?></td>
+            <td class="autofit"><?= $result['AM_time_IN'] . '<br>' . '<img src="../student/'. $result['AM_time_IN_pic'] . '" alt="AM Time In Picture" width="300" height="300">' ?></td>
+            <td class="autofit"><?= $result['AM_time_OUT'] . '<br>' . '<img src="../student/'. $result['AM_time_OUT_pic'] . '" alt="AM Time Out Picture" width="300" height="300">'?></td>
+            <td class="autofit"><?= $result['PM_time_IN'] . '<br>' . '<img src="../student/'. $result['PM_time_IN_pic'] . '" alt="PM Time In Picture" width="300" height="300">'?></td>
+            <td class="autofit"><?= $result['PM_time_OUT'] . '<br>' . '<img src="../student/'. $result['PM_time_OUT_pic'] . '" alt="PM Time Out Picture" width="300" height="300">'?></td>
             <td><?= $result['total_working_hours'] ?></td>
             <td><?= $result['recordStatus'] ?></td>
             <td>
