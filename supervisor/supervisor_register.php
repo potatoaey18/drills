@@ -24,13 +24,31 @@ session_start();
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 2rem;
-            background: url(./images/login_bg.jpg);
+            background: url(./images/itech.jpg);
             height: 94vh;
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
             overflow: hidden;
+        }
+        h5{
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 20px;  
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            line-height: 0.5;
+        }
+        i {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;  
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            line-height: 0.5;
         }
     </style>
     </head>
@@ -39,8 +57,11 @@ session_start();
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-border-3 u-border-grey-75 u-container-style u-expanded-width-xs u-group u-radius-17 u-shape-round u-group-1">
           <div class="u-container-layout u-container-layout-1">
-            <img class="u-expanded-width u-image u-image-default u-image-1" src="images/image-3.png" alt="" data-image-width="711" data-image-height="231">
-            <div class="u-form u-form-1">
+          <img class="u-image u-image-contain u-image-default u-image-1" src="images/pupLogo.png" alt="" style="max-height: 100px; align-items: center; justify-content: center; display: flex; margin: 10px auto;">
+            <h5>Polytechnic University of the Philippines</h5>
+            <i>Institute of Technology</i>
+            <h5>Supervisor Login</h5>
+              <div class="u-form u-form-1">
 
               <form action="../php/supervisor_registerCode.php" method="POST" enctype="multipart/form-data" class="u-clearfix u-form-spacing-20 u-form-vertical u-inner-form" style="padding: 10px">
 

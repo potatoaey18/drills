@@ -85,12 +85,12 @@ if (isset($_POST['register'])) {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'bulsuojtportala@gmail.com';
-            $mail->Password = 'wbxgxtphzeptkjqa';
+            $mail->Username = 'itechojtportal@gmail.com';
+            $mail->Password = 'iidkdsgmmvthssov';
             $mail->SMTPSecure = 'ssl';
             $mail->Port = 465;
 
-            $mail->setFrom('bulsuojtportala@gmail.com');
+            $mail->setFrom('itechojtportal@gmail.com');
             $mail->addAddress($email);
             $mail->isHTML(true);
             $mail->Subject = 'Verify Your Account';

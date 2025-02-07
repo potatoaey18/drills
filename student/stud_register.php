@@ -15,7 +15,7 @@ session_start();
     <meta name="description" content="">
     <title>Register - OJT Web Portal</title>
     <link rel="stylesheet" href="css/nicepage.css" media="screen">
-<link rel="stylesheet" href="css/Page-2.css" media="screen">
+    <link rel="stylesheet" href="css/Page-2.css" media="screen">
     <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     <link href="css/lib/sweetalert/sweetalert.css" rel="stylesheet">
@@ -25,12 +25,20 @@ session_start();
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 2rem;
-            background: url(./images/login_bg.jpg);
+            background: url(./images/itech.jpg);
             height: 94vh;
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
+        }
+        h4{
+            font-size: 30px;
+            font-weight: 600;
+            margin-bottom: 20px;  
+            align-items: center;
+            justify-content: center;
+            display: flex;
         }
     </style>
 </head>
@@ -39,7 +47,8 @@ session_start();
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-border-3 u-border-grey-75 u-container-style u-group u-radius-17 u-shape-round u-group-1">
           <div class="u-container-layout u-container-layout-1">
-            <img class="u-expanded-width u-image u-image-1" src="images/image-1.png" data-image-width="711" data-image-height="231">
+             <img src="images/pupLogo.png" alt="Logo" style="max-height: 100px; align-items: center; justify-content: center; display: flex; margin: 10px auto;">
+              <h4>Student Registration</h4>
             <div class="u-form u-form-1">
             <form action="../php/stud_registerCode.php" method="POST" enctype="multipart/form-data" class="u-clearfix u-form-spacing-20 u-form-vertical u-inner-form" style="padding: 10px">
                 <div class="u-form-group u-form-name u-form-partition-factor-3 u-label-none">
@@ -63,10 +72,7 @@ session_start();
                   <div class="u-form-select-wrapper">
                     <select id="select-f65c" name="student_dept" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-5" required="true">
                       <option value="">Department</option>
-                      <option value="College of Engineering">College of Engineering</option>
-                      <option value="College of Education">College of Education</option>
-                      <option value="College of Arts">College of Arts</option>
-                      <option value="College of Science">College of Science</option>
+                      <option value="Institute of Technology">Institute of Technology</option>  
                     </select>
                   </div>
                 </div>
@@ -161,39 +167,15 @@ $(document).ready(function() {
         // Add a default option
         courseSelect.append('<option value="">Course</option>');
 
-        if (selectedDepartment === 'College of Education') {
-            courseSelect.append('<option value="Bachelor of Elementary Education">Bachelor of Elementary Education</option>');
-            courseSelect.append('<option value="Bachelor of Early Childhood Education">Bachelor of Early Childhood Education</option>');
-            courseSelect.append('<option value="Bachelor of Secondary Education Major in English minor in Mandarin">Bachelor of Secondary Education Major in English minor in Mandarin</option>');
-            courseSelect.append('<option value="Bachelor of Secondary Education Major in Filipino">Bachelor of Secondary Education Major in Filipino</option>');
-            courseSelect.append('<option value="Bachelor of Secondary Education Major in Sciences">Bachelor of Secondary Education Major in Sciences</option>');
-            courseSelect.append('<option value="Bachelor of Secondary Education Major in Mathematics">Bachelor of Secondary Education Major in Mathematics</option>');
-            courseSelect.append('<option value="Bachelor of Secondary Education Major in Social Studies">Bachelor of Secondary Education Major in Social Studies</option>');
-            courseSelect.append('<option value="Bachelor of Secondary Education Major in Values Education">Bachelor of Secondary Education Major in Values Education</option>');
-            courseSelect.append('<option value="Bachelor of Physical Education">Bachelor of Physical Education</option>');
-            courseSelect.append('<option value="Bachelor of Technology and Livelihood Education Major in Industrial Arts">Bachelor of Technology and Livelihood Education Major in Industrial Arts</option>');
-            courseSelect.append('<option value="Bachelor of Technology and Livelihood Education Major in Information and Communication Technology">Bachelor of Technology and Livelihood Education Major in Information and Communication Technology</option>');
-            courseSelect.append('<option value="Bachelor of Technology and Livelihood Education Major in Home Economics">Bachelor of Technology and Livelihood Education Major in Home Economics</option>');
-        } else if (selectedDepartment === 'College of Engineering') {
-            courseSelect.append('<option value="Bachelor of Science in Civil Engineering">Bachelor of Science in Civil Engineering</option>');
-            courseSelect.append('<option value="Bachelor of Science in Computer Engineering">Bachelor of Science in Computer Engineering</option>');
-            courseSelect.append('<option value="Bachelor of Science in Electrical Engineering">Bachelor of Science in Electrical Engineering</option>');
-            courseSelect.append('<option value="Bachelor of Science in Electronics Engineering">Bachelor of Science in Electronics Engineering</option>');
-            courseSelect.append('<option value="Bachelor of Science in Industrial Engineering">Bachelor of Science in Industrial Engineering</option>');
-            courseSelect.append('<option value="Bachelor of Science in Manufacturing Engineering">Bachelor of Science in Manufacturing Engineering</option>');
-            courseSelect.append('<option value="Bachelor of Science in Mechanical Engineering">Bachelor of Science in Mechanical Engineering</option>');
-            courseSelect.append('<option value="Bachelor of Science in Mechatronics Engineering">Bachelor of Science in Mechatronics Engineering</option>');
-        } else if (selectedDepartment === 'College of Science') {
-            courseSelect.append('<option value="Bachelor of Science in Environmental Science">Bachelor of Science in Environmental Science</option>');
-            courseSelect.append('<option value="Bachelor of Science in Food Technology">Bachelor of Science in Food Technology</option>');
-            courseSelect.append('<option value="Bachelor of Science in Math with Specialization in Computer Science">Bachelor of Science in Math with Specialization in Computer Science</option>');
-            courseSelect.append('<option value="Bachelor of Science in Math with Specialization in Applied Statistics">Bachelor of Science in Math with Specialization in Applied Statistics</option>');
-            courseSelect.append('<option value="Bachelor of Science in Math with Specialization in Business Applications">Bachelor of Science in Math with Specialization in Business Applications</option>');
-        } else if (selectedDepartment === 'College of Arts') {
-            courseSelect.append('<option value="Bachelor of Arts in Broadcasting">Bachelor of Arts in Broadcasting</option>');
-            courseSelect.append('<option value="Bachelor of Arts in Journalism">Bachelor of Arts in Journalism</option>');
-            courseSelect.append('<option value="Bachelor of Performing Arts (Theater Track)">Bachelor of Performing Arts (Theater Track)</option>');
-            courseSelect.append('<option value="Batsilyer ng Sining sa Malikhaing Pagsulat">Batsilyer ng Sining sa Malikhaing Pagsulat</option>');
+        if (selectedDepartment === 'Institute of Technology') {
+            courseSelect.append('<option value="Diploma in Civil Engineering Technology (DCvET)">Diploma in Civil Engineering Technology (DCvET)</option>');
+            courseSelect.append('<option value="Diploma in Computer Engineering Technology (DCET)">Diploma in Computer Engineering Technology (DCET)</option>');
+            courseSelect.append('<option value="Diploma in Electrical Engineering Technology (DEET)">Diploma in Electrical Engineering Technology (DEET)</option>');
+            courseSelect.append('<option value="Diploma in Electronics Engineering Technology (DECET)">Diploma in Electronics Engineering Technology (DECET)</option>');
+            courseSelect.append('<option value="Diploma in Information Technology (DIT)">Diploma in Information Technology (DIT)</option>');
+            courseSelect.append('<option value="Diploma in Mechanical Engineering Technology (DMET)">Diploma in Mechanical Engineering Technology (DMET)</option>');
+            courseSelect.append('<option value="Diploma in Office Management Technology (DOMT)">Diploma in Office Management Technology (DOMT)</option>');
+            courseSelect.append('<option value="Diploma in Railway Engineering Technology (DRET)">Diploma in Railway Engineering Technology (DRET)</option>');
         } else {
         }
     });

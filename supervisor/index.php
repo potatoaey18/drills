@@ -21,13 +21,31 @@ session_start();
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 2rem;
-            background: url(./images/login_bg.jpg);
+            background: url(./images/itech.jpg);
             height: 94vh;
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
             overflow: hidden;
+        }
+        h5{
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 20px;  
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            line-height: 0.5;
+        }
+        i {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;  
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            line-height: 0.5;
         }
     </style>
 </head>
@@ -36,8 +54,10 @@ session_start();
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-border-3 u-border-grey-75 u-container-style u-group u-radius-17 u-shape-round u-group-1">
           <div class="u-container-layout u-container-layout-1">
-            <img class="u-image u-image-contain u-image-default u-image-1" src="images/image.png" alt="" data-image-width="458" data-image-height="312">
-            <h6 class="u-align-center u-form-group u-form-submit">Supervisor Login</h6>
+          <img class="u-image u-image-contain u-image-default u-image-1" src="images/pupLogo.png" alt="" style="max-height: 100px; align-items: center; justify-content: center; display: flex; margin: 10px auto;">
+            <h5>Polytechnic University of the Philippines</h5>
+            <i>Institute of Technology</i>
+            <h5>Supervisor Login</h5>
             <div class="u-form u-form-1">
             <form action="../php/supervisor_loginCode.php" method="POST">
                 <div class="u-form-group u-form-name u-label-none">

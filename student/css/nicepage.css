@@ -12597,7 +12597,6 @@ section.u-image:not(.u-hover-box),
   background-origin: padding-box;
 }
 .u-sheet:not(.u-image):not(.u-video) {
-  /*background: url(../images/login_bg.jpg);*/
   background-size: cover;
   background-position: center;
   pointer-events: none;
