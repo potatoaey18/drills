@@ -3,7 +3,7 @@
 }
 
 .u-section-1 .u-group-1 {
-  width: 459px;
+  width: 700px;
   height: auto;
   box-shadow: 10px 11px 7px 0 rgba(0,0,0,0.55);
   min-height: 486px;
@@ -22,7 +22,7 @@
 
 .u-section-1 .u-form-1 {
   height: 227px;
-  width: 393px;
+  width: 600px;
   margin: 8px auto 0;
 }
 
@@ -63,10 +63,10 @@
 
 @media (max-width: 575px) {
   .u-section-1 .u-group-1 {
-    width: 340px;
+    width: 400px; /* Slightly wider for small screens */
   }
 
   .u-section-1 .u-form-1 {
-    width: 320px;
+    width: 380px;
   }
 }

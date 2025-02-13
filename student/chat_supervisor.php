@@ -157,15 +157,6 @@ require_once 'templates/stud_navbar.php';
                 </div>
               </div>
             </div>
-
-
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="footer">
-                  <p>2024 © BulSU - <a href="#">Mabuhay</a></p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

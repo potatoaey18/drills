@@ -300,15 +300,15 @@ if(isset($_GET['student_ID'])){
 <!-- /.container-fluid -->
           <!-- /# row -->
           
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-lg-12">
               <div class="footer">
-                <p>2024 © BulSU -
+                <p>2024 ©  -
                   <a href="#">Mabuhay</a>
                 </p>
               </div>
             </div>
-          </div>
+          </div> -->
         </section>
       </div>
     </div>

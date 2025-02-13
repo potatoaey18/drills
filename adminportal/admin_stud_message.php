@@ -158,13 +158,13 @@ require_once 'templates/admin_navbar.php';
             </div>
 
 
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-lg-12">
                 <div class="footer">
-                  <p>2024 © BulSU - <a href="#">Mabuhay</a></p>
+                  <p>2024 ©  - <a href="#">Mabuhay</a></p>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

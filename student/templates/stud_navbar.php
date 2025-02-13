@@ -3,7 +3,8 @@
             <div class="nano-content">
                 <ul>
                     <div class="logo"><a href="dashboard.php">
-                            <!-- <img src="images/logo.png" alt="" /> --><span>OJT Web Portal</span></a></div>
+                            <!-- <img src="images/pupLogo.png" alt="" height="215px" /> -->
+                            <span>OJT Web Portal</span></a></div>
                     <li class="label">Main</li>
                     <li><a href="dashboard.php"><i class="ti-home"></i> Dashboard </a></li>
 

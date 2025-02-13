@@ -230,15 +230,15 @@ if(isset($_GET['supervisorID'])){
 <!-- /.container-fluid -->
           <!-- /# row -->
           
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-lg-12">
               <div class="footer">
-                <p>2024 © BulSU. -
-                  <a href="#">example.com</a>
+                <p>2024 © . -
+                  <a href="#"></a>
                 </p>
               </div>
             </div>
-          </div>
+          </div> -->
         </section>
       </div>
     </div>

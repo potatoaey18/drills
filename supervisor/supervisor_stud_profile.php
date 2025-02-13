@@ -303,7 +303,7 @@ if(isset($_GET['student_ID'])){
           <div class="row">
             <div class="col-lg-12">
               <div class="footer">
-                <p>2024 © BulSU -
+                <p>2024 © -
                   <a href="#">Mabuhay</a>
                 </p>
               </div>

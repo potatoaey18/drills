@@ -137,19 +137,19 @@ require_once 'templates/coordinators_navbar.php';
 
 
                 <!-- /# row -->
-                <section id="main-content">
+                <!-- <section id="main-content">
                     <div class="row">
                         <div class="col-lg-12">
                             <div id="extra-area-chart"></div>
                             <div id="morris-line-chart"></div>
                             <div class="footer">
-                                <p>2024 © BulSU -
+                                <p>2024 © -
                                     <a href="#">Mabuhay</a>
                                 </p>
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> -->
             </div>
         </div>
     </div>
