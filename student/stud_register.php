@@ -368,29 +368,23 @@ unset($_SESSION['status']);
   
   <script>
 $(document).ready(function() {
-    $('#select-f65c').change(function() {
-        var selectedDepartment = $(this).val();
-        var courseSelect = $('select[name="student_course"]');
+    var courseSelect = $('select[name="student_course"]');
 
-        // Clear the course options
-        courseSelect.empty();
+    // Clear existing options and add a default one
+    courseSelect.empty();
+    courseSelect.append('<option value="">Select Course</option>');
 
-        // Add a default option
-        courseSelect.append('<option value="">Course</option>');
-
-        if (selectedDepartment === 'Institute of Technology') {
-            courseSelect.append('<option value="Diploma in Civil Engineering Technology (DCvET)">Diploma in Civil Engineering Technology (DCvET)</option>');
-            courseSelect.append('<option value="Diploma in Computer Engineering Technology (DCET)">Diploma in Computer Engineering Technology (DCET)</option>');
-            courseSelect.append('<option value="Diploma in Electrical Engineering Technology (DEET)">Diploma in Electrical Engineering Technology (DEET)</option>');
-            courseSelect.append('<option value="Diploma in Electronics Engineering Technology (DECET)">Diploma in Electronics Engineering Technology (DECET)</option>');
-            courseSelect.append('<option value="Diploma in Information Technology (DIT)">Diploma in Information Technology (DIT)</option>');
-            courseSelect.append('<option value="Diploma in Mechanical Engineering Technology (DMET)">Diploma in Mechanical Engineering Technology (DMET)</option>');
-            courseSelect.append('<option value="Diploma in Office Management Technology (DOMT)">Diploma in Office Management Technology (DOMT)</option>');
-            courseSelect.append('<option value="Diploma in Railway Engineering Technology (DRET)">Diploma in Railway Engineering Technology (DRET)</option>');
-        } else {
-        }
-    });
+    // Add the course options directly
+    courseSelect.append('<option value="Diploma in Civil Engineering Technology (DCvET)">Diploma in Civil Engineering Technology (DCvET)</option>');
+    courseSelect.append('<option value="Diploma in Computer Engineering Technology (DCET)">Diploma in Computer Engineering Technology (DCET)</option>');
+    courseSelect.append('<option value="Diploma in Electrical Engineering Technology (DEET)">Diploma in Electrical Engineering Technology (DEET)</option>');
+    courseSelect.append('<option value="Diploma in Electronics Engineering Technology (DECET)">Diploma in Electronics Engineering Technology (DECET)</option>');
+    courseSelect.append('<option value="Diploma in Information Technology (DIT)">Diploma in Information Technology (DIT)</option>');
+    courseSelect.append('<option value="Diploma in Mechanical Engineering Technology (DMET)">Diploma in Mechanical Engineering Technology (DMET)</option>');
+    courseSelect.append('<option value="Diploma in Office Management Technology (DOMT)">Diploma in Office Management Technology (DOMT)</option>');
+    courseSelect.append('<option value="Diploma in Railway Engineering Technology (DRET)">Diploma in Railway Engineering Technology (DRET)</option>');
 });
+
 </script>
 
 </body></html>
