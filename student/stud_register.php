@@ -22,117 +22,328 @@ session_start();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
+            font-family: 'Arial', sans-serif;
+            text-align: left;
             padding: 2rem;
-            background: url(./images/itech.jpg);
-            height: 94vh;
+            height: 100%;
+            width: 100%;
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-        }
-        h4{
-            font-size: 30px;
-            font-weight: 600;
-            margin-bottom: 20px;  
+            overflow-y: scroll;
+            display: flex;
             align-items: center;
             justify-content: center;
-            display: flex;
         }
+
+        h5 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 50px;  
+            align-items: left;
+            justify-content: left;
+            display: flex;
+            line-height: 0.5;
+            color: #9B0C0C;
+        }
+
+        input,
+        select{
+            width: 300px;
+            height: 50px;
+            padding: 10px;
+            margin: 10px 10px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            outline: none;
+            color: #000;
+            font-size: 14px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 400;
+            color: #000;
+            margin-left: 10px;
+        }
+
+        .nav-1 {
+            font-family: 'Source Serif 4', serif;
+            background: linear-gradient(to left, rgba(155, 12, 12, 1), rgba(255, 255, 255, 1));
+            color: #D11010;
+            padding: 15px 0;
+            text-align: left;
+            font-size: 20px;
+            font-weight: 400;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            display: flex;
+            align-items: left;
+            margin-bottom: 20px;
+            background-clip: padding-box;
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            height: 50px;
+            margin-left: 20px;
+        }
+
+        .nav-title-caption-container {
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+        }
+
+        .nav-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-caption {
+            font-size: 16px;
+            color: #000;
+            font-weight: normal;
+        }
+        
+        .login {
+          width: 1000px;
+          margin: 0 auto;
+        }
+
+        .register-button {
+            background: #9B0C0C;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: 0.3s;
+            width: 100%;
+            height: 50px;
+        }
+
+        .register-section {
+            background: #fff;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 3fr 8fr;
+            gap: 50px;
+            line-height: 2;
+            margin-top: 100px;
+            
+            /* Centering */
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+
+        .register-here {
+            font-size: 16px;
+            color:#0C0C9B;
+        }
+
+        .header {
+            position: absolute; 
+            top: 100px; 
+            left: 20px; 
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            margin-left: 20px;
+            margin-bottom: 20px;
+            gap: 10px; 
+        }
+
+        .back-button {
+            display: flex;
+            align-items: center;
+            background: none;
+            color: rgba(128, 128, 128, 0.5);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 400;
+            transition: 0.3s;
+        }
+
+        .back-button img {
+            height: 40px;
+            filter: grayscale(100%);
+            opacity: 0.3;
+            transition: filter 0.3s ease, opacity 0.3s ease;
+        }
+
+        h5 {
+            display: flex;
+            align-items: center;
+            margin-left: 18px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        h5 img {
+            margin-right: 10px;
+            filter: invert(10%) sepia(88%) saturate(5144%) hue-rotate(356deg) brightness(97%) contrast(106%);
+        }
+
+
+      
+        .back-button:hover,
+        .back-button:hover img {
+            color: #9B0C0C;
+            filter: grayscale(0%) sepia(100%) hue-rotate(330deg) saturate(500%);
+            opacity: 1;
+        }
+
+        .row-1, 
+        .row-2,
+        .row-3,
+        .row-4,
+        .row-5 {
+          display: flex;
+          gap: 10px;
+        }
+
+        .required {
+            color: red;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
     </style>
 </head>
   <body>
-    <section class="u-clearfix u-section-1" id="sec-113a">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-border-3 u-border-grey-75 u-container-style u-group u-radius-17 u-shape-round u-group-1">
-          <div class="u-container-layout u-container-layout-1">
-             <img src="images/pupLogo.png" alt="Logo" style="max-height: 100px; align-items: center; justify-content: center; display: flex; margin: 10px auto;">
-              <h4>Student Registration</h4>
+    <nav class="nav-1">
+          <img src="images/pupLogo.png" alt="PUP Logo" class="nav-logo">
+          <div class="nav-title-caption-container">
+              <div class="nav-title">Polytechnic University of the Philippines-ITECH</div>
+              <div class="nav-caption">On the Job Training Portal</div>
+          </div>
+      </nav>
+
+    <header style="z-index: 10;" class="header">
+    <a href="index.php" class="back-button"><img src="images/less-than.png" alt="Back">Back</a>
+              <h5 style="align-items:center;">
+                <img src="images/pencil.svg" alt="Edit Icon" height="27">
+                REGISTRATION
+              </h5>
+    </header>
+
+    <section id="sec-113a" class="register-section">
+      <div>
+        <div>
+          <div>
             <div class="u-form u-form-1">
-            <form action="../php/stud_registerCode.php" method="POST" enctype="multipart/form-data" class="u-clearfix u-form-spacing-20 u-form-vertical u-inner-form" style="padding: 10px">
-                <div class="u-form-group u-form-name u-form-partition-factor-3 u-label-none">
-                  <label for="name-3b9a" class="u-label">First Name</label>
-                  <input type="text" placeholder="First Name" id="name-3b9a" name="f_name" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-1" required="true">
-                </div>
-                <div class="u-form-email u-form-group u-form-partition-factor-3 u-label-none">
-                  <label for="email-3b9a" class="u-label">Middle Name</label>
-                  <input type="text" placeholder="Middle Name" id="email-3b9a" name="m_name" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-2" required="true">
-                </div>
-                <div class="u-form-group u-form-partition-factor-3 u-label-none u-form-group-3">
-                  <label for="text-743c" class="u-label">Last</label>
-                  <input type="text" placeholder="Last Name" id="text-743c" name="l_name" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-3" required="true">
-                </div>
-                <div class="u-form-group u-form-partition-factor-4 u-label-none u-form-group-4">
-                  <label for="text-7a3c" class="u-label">Student ID</label>
-                  <input type="text" placeholder="Student ID" id="text-7a3c" name="student_id" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-4" required="true">
-                </div>
-                <div class="u-form-group u-form-partition-factor-4 u-label-none u-form-group-4">
-                  <label for="select-f65c" class="u-label">Department</label>
-                  <div class="u-form-select-wrapper">
-                    <select id="select-f65c" name="student_dept" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-5" required="true">
-                      <option value="">Department</option>
-                      <option value="Institute of Technology">Institute of Technology</option>  
-                    </select>
+            <form action="../php/stud_registerCode.php" method="POST" enctype="multipart/form-data">
+
+                <div class="row-1">
+                    <div>
+                      <label for="text-da7f">Email <span class="required">*</span></label>
+                      <input type="text" placeholder="Email" id="text-da7f" name="eMail" required="true">
+                      </div>
+
+                      <div>
+                        <label for="text-16c0">Password <span class="required">*</span></label>
+                        <input type="password" placeholder="Password" id="text-16c0" name="pword" required="true">
+                      </div>
+
+                      <div>
+                        <label for="text-5809">Repeat Password <span class="required">*</span></label>
+                        <input type="password" placeholder="Repeat Password" id="text-5809" name="cpword" required="true">
+                    </div>
                   </div>
-                </div>
-                <div class="u-form-group u-form-partition-factor-4 u-form-select u-label-none u-form-group-5">
-                  <label for="select-f65c" class="u-label">Course</label>
-                  <div class="u-form-select-wrapper">
-                    <select id="select-f65c" name="student_course" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-5" required="true">
-                      <option value="">Course</option>
-                    </select>
+
+                <div class="row-2">
+                    <div>
+                      <label for="name-3b9a">First Name <span class="required">*</span></label>
+                      <input type="text" placeholder="First Name" id="name-3b9a" name="f_name"  required="true">
+                    </div>
+
+                    <div>
+                      <label for="email-3b9a">Middle Name <span class="required">*</span></label>
+                      <input type="text" placeholder="Middle Name" id="email-3b9a" name="m_name" required="true">
+                    </div>
+
+                    <div>
+                      <label for="text-743c">Last Name <span class="required">*</span></label>
+                      <input type="text" placeholder="Last Name" id="text-743c" name="l_name"  required="true">
                     </div>
                 </div>
-                <div class="u-form-group u-form-partition-factor-4 u-label-none u-form-group-6">
-                  <label for="text-bb89" class="u-label">Section</label>
-                  <input type="text" placeholder="Section" id="text-bb89" name="student_section" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-6" required="true">
+
+                <div class="row-3">
+                    <div>
+                      <label for="text-7a3c">Student ID <span class="required">*</span></label>
+                      <input type="text" placeholder="Student ID" id="text-7a3c" name="student_id" required="true">
+                    </div>
+                    
+                    <div >
+                      <label for="select-f65c">Course <span class="required">*</span></label>
+                      <div>
+                        <select id="select-f65c" name="student_course"  required="true">
+                          <option value="">Course</option>
+                        </select>
+                        </div>
+                    </div>
+
+                    <div>
+                      <label for="text-bb89">Section <span class="required">*</span></label>
+                      <input type="text" placeholder="Section" id="text-bb89" name="student_section" required="true">
+                    </div>
+
                 </div>
-                <div class="u-form-group u-form-partition-factor-3 u-label-none u-form-group-7">
-                  <label for="text-63ba" class="u-label">Address</label>
-                  <input type="text" placeholder="Address" id="text-63ba" name="C_address" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-7" required="true">
+
+                <div class="row-4">
+                    <div>
+                      <label for="text-63ba">Address <span class="required">*</span></label>
+                      <input type="text" placeholder="Address" id="text-63ba" name="C_address" required="true">
+                    </div>
+                    
+                    <div>
+                      <label for="text-124c">Gender <span class="required">*</span></label>
+                      <input type="text" placeholder="Gender" id="text-124c" name="gender" required="true">
+                    </div>
+
+                    <div>
+                      <label for="text-fd88">Phone Number <span class="required">*</span></label>
+                      <input type="number" placeholder="Contact Number" id="text-fd88" name="cpNum" required="true">
+                    </div>
                 </div>
-                <div class="u-form-group u-form-partition-factor-3 u-label-none u-form-group-8">
-                  <label for="text-124c" class="u-label">Gender</label>
-                  <input type="text" placeholder="Gender" id="text-124c" name="gender" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-8" required="true">
+                
+                <div class="row-5">
+                    <div>
+                      <label for="text-13e6">Guardians Name <span class="required">*</span></label>
+                      <input type="text" placeholder="Guardians Name" id="text-13e6" name="guardians_name" required="true">
+                    </div>
+
+                    <div>
+                      <label for="text-df1c">Guardians Phone Number <span class="required">*</span></label>
+                      <input type="number" placeholder="Guardians Phone Number" id="text-df1c" name="guardians_cpNumber" required="true">
+                    </div>
+                    
+                    <div>
+                      <label for="text-1c0f">Select Image <span class="required">*</span></label>
+                      <input type="file" accept="image/*" placeholder="Image File" id="text-1c0f" name="stud_pic" required="true">
+                    </div>
                 </div>
-                <div class="u-form-group u-form-partition-factor-3 u-label-none u-form-group-9">
-                  <label for="text-fd88" class="u-label">Phone Number</label>
-                  <input type="number" placeholder="Contact Number" id="text-fd88" name="cpNum" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-9" required="true">
-                </div>
-                <div class="u-form-group u-form-partition-factor-3 u-label-none u-form-group-10">
-                  <label for="text-da7f" class="u-label">Email</label>
-                  <input type="text" placeholder="Email" id="text-da7f" name="eMail" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-10" required="true">
-                </div>
-                <div class="u-form-group u-form-partition-factor-3 u-label-none u-form-group-11">
-                  <label for="text-16c0" class="u-label">Password</label>
-                  <input type="password" placeholder="Password" id="text-16c0" name="pword" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-11" required="true">
-                </div>
-                <div class="u-form-group u-form-partition-factor-3 u-label-none u-form-group-12">
-                  <label for="text-5809" class="u-label">Repeat Password</label>
-                  <input type="password" placeholder="Repeat Password" id="text-5809" name="cpword" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-12" required="true">
-                </div>
-                <div class="u-form-group u-form-partition-factor-2 u-label-none u-form-group-13">
-                  <label for="text-13e6" class="u-label">Guardians Name</label>
-                  <input type="text" placeholder="Guardians Name" id="text-13e6" name="guardians_name" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-13" required="true">
-                </div>
-                <div class="u-form-group u-form-partition-factor-2 u-label-none u-form-group-14">
-                  <label for="text-df1c" class="u-label">Guardians Phone Number</label>
-                  <input type="number" placeholder="Guardians Phone Number" id="text-df1c" name="guardians_cpNumber" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-14" required="true">
-                </div>
-                <div class="u-form-group u-label-none u-form-group-15">
-                  <label for="text-1c0f" class="u-label">Select Image</label>
-                  <input type="file" accept="image/*" placeholder="Image File" id="text-1c0f" name="stud_pic" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-15" required="true">
-                </div>
+
                 <br>
-                <div class="u-align-center u-form-group u-form-submit">
-                <button name="register" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-grey-70 u-hover-palette-1-dark-1 u-radius-28 u-btn-1">Register</button>
+
+                <div>
+                  <button name="register" class="register-button">Register</button>
                 </div>
                 
               </form>
               <br>
             </div>
-            <p class="u-text u-text-default u-text-1">Do you have an account ? <a href="index.php"> Login</a></p>
           </div>
         </div>
       </div>
