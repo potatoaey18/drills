@@ -25,7 +25,7 @@ session_start();
             background: url(./images/landing.jpg);
             background-color: rgba(255, 255, 255, 0.39);
             background-blend-mode: overlay; 
-            height: 94vh;
+            height: 100vh;
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;

@@ -120,6 +120,7 @@
 
         .container {
             height: 100%;
+            max-height: 100vh;
             width: 100%;
             max-width: 40%;
             background-color: rgba(218, 218, 218, 0.8);            
