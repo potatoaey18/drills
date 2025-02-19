@@ -44,7 +44,7 @@ session_start();
             align-items: left;
             justify-content: left;
             display: flex;
-            line-height: 0.5;
+            line-height: 1;
             color: #9B0C0C;
         }
 
@@ -145,7 +145,6 @@ session_start();
             transform: translate(-50%, -50%);
         }
 
-
         .register-here {
             font-size: 16px;
             color:#0C0C9B;
@@ -218,6 +217,38 @@ session_start();
             font-weight: bold;
             margin-left: 5px;
         }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.5rem;
+            }
+
+            .nav-logo {
+                height: 35px;
+            }
+
+            .register-section {
+                padding: 15px;
+                width: 95%;
+                margin-top: 70px;
+            }
+
+            input, select {
+                height: 40px;
+                font-size: 13px;
+            }
+
+            label {
+                font-size: 13px;
+            }
+
+            .register-button {
+                height: 40px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
 
     </style>
 </head>

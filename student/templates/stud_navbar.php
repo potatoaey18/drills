@@ -1,236 +1,80 @@
-<div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
-        <div class="nano">
-            <div class="nano-content">
+<nav class="nav-1">
+    <img src="images/pupLogo.png" alt="PUP Logo" class="nav-logo">
+    <div class="nav-title-caption-container">
+        <div class="nav-title">Polytechnic University of the Philippines-ITECH</div>
+    </div>
+    <div class="user">
+        <div class="header-icon">
+            <div class="avatar-trigger" data-toggle="dropdown">
+                <?php
+                if(isset($_SESSION['auth_user']['student_id'])) {
+                    $studID = $_SESSION['auth_user']['student_id'];
+                    $stmt = $conn->prepare("SELECT * FROM students_data WHERE id = ? ");
+                    $stmt->execute([$studID]);
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $profileImage = $result['profile_picture'] ? $result['profile_picture'] : 'student\images\profile.png';
+                }
+                ?>
+                
+                <div class="user-info">
+                <span class="user-name">
+                            <?php echo $result['first_name'];?>
+                        </span>
+
+                        <span class="schoolID">
+                            <?php echo $result['student_ID'];?>
+                        </span>
+               </div>
+
+               <?php if (isset($profileImage)): ?>
+                    <img src="<?php echo $profileImage; ?>" alt="User Avatar" class="avatar-img">
+                <?php else: ?>
+                    <span>No Image</span>
+                <?php endif; ?>
+
+            </div>
+            <div class="drop-down dropdown-profile dropdown-menu dropdown-menu-right">
+                <div class="dropdown-content-body">
+                    <ul>
+                        <li>
+                            <a href="#" onclick="profile();">
+                                <i class="ti-user"></i>
+                                <span>Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="settings();">
+                                <i class="ti-settings"></i>
+                                <span>Setting</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="logout();">
+                                <i class="ti-power-off"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>		
+</nav>
+<div>
+        <div>
+            <div class="sidenav">
                 <ul>
-                    <div class="logo"><a href="dashboard.php">
-                            <!-- <img src="images/pupLogo.png" alt="" height="215px" /> -->
-                            <span>OJT Web Portal</span></a></div>
-                    <li class="label">Main</li>
-                    <li><a href="dashboard.php"><i class="ti-home"></i> Dashboard </a></li>
-
-                    <li class="label">Apps</li>
-                    <li><a href="ojt_requirements.php"><i class="ti-folder"></i> OJT Requirements </a></li>
-                    <li><a href="partner_companies.php"><i class="ti-layout-width-default"></i>Partner Companies </a></li>
-                    <li><a href="daily_time_records.php"><i class="ti-alarm-clock"></i> Daily Time Records </a></li>
-                    <li><a href="stud_task_list.php"><i class="ti-files"></i> Task List </a></li>
-                    <li><a class="sidebar-sub-toggle"><i class="ti-files"></i> Journal Report <span class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            <li><a href="narrativeReport.php">Insert Report</a></li>
-                            <li><a href="VIEW_narrativeReport.php">View Daily Reports</a></li>
-
-                        </ul>
-                    </li>
-                    <li><a class="sidebar-sub-toggle"><i class="ti-comment-alt"></i> Chats <span class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            <li><a href="stud_message.php">Chat Students</a></li>
-                            <li><a href="coordinator_studMESSAGE.php">Chat OJT Coordinators</a></li>
-                            <li><a href="chat_supervisor.php">Chat HTE Coordinators</a></li>
-                            <li><a href="chat_admin.php">Chat SIP Coordinators</a></li>
-                            
-
-                        </ul>
-                    </li>
+                    <li><a href="dashboard.php"><img src="images/home.png"> Home </a></li>
+                    <li><a href="dashboard.php"><img src="images/profile.png"> Profile </a></li>
+                    <li><a href="dashboard.php"><img src="images/notification.png"> Notification </a></li>
+                    <li><a href="dashboard.php"><img src="images/message.png"> Messages </a></li>
                 </ul>
             </div>
         </div>
     </div>
     <!-- /# sidebar -->
 
-    <div class="header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="float-left">
-                        <div class="hamburger sidebar-toggle">
-                            <span class="line"></span>
-                            <span class="line"></span>
-                            <span class="line"></span>
-                        </div>
-                    </div>
-                    <div class="float-right">
-                        <div class="dropdown dib">
-                            <div class="header-icon" data-toggle="dropdown">
-                                <i class="ti-bell">
-                                    <span class="badge badge-danger" id="notification-badge">
-                                    <?php
-                                        if(isset($_SESSION['auth_user']['student_id'])) {
-                                            $studID = $_SESSION['auth_user']['student_id'];
-                                            $unread = 'Unread';
-
-                                            // Adjust your SQL query based on your database schema
-                                            $stmt = $conn->prepare("SELECT COUNT(*) AS total_unread FROM system_notification WHERE student_id = ? AND status = ?");
-                                            $stmt->execute([$studID, $unread]);
-                                            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                                            $totalUnread = $result['total_unread'];
-
-                                            echo $totalUnread;
-                                        }
-                                    ?>
-                                    </span>
-                                </i>
-                                <div class="drop-down dropdown-menu dropdown-menu-right" style="position: absolute; transform: translate3d(-227px, -3px, 0px); top: 0px; left: 0px; will-change: transform; height: 300px; overflow: auto; border: 1px solid #ccc;">
-                                    <div class="dropdown-content-heading">
-                                        <span class="text-left">Recent Notifications</span>
-                                    </div>
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                        <li class="text-center">
-                                                <a href="#" class="more-link" id="markASread"><i class="ti-email"></i> Mark all as read</a>
-                                        </li>
-                                        <?php
-                                        if(isset($_SESSION['auth_user']['student_id'])) {
-                                            $studID = $_SESSION['auth_user']['student_id'];
-                                            
-                                            // Adjust your SQL query based on your database schema
-                                            $stmt = $conn->prepare("SELECT * FROM system_notification LEFT JOIN students_data ON students_data.id = system_notification.student_id WHERE system_notification.student_id = ? ORDER BY system_notification.id DESC");
-                                            $stmt->execute([$studID]);
-                                            $notifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                                            
-                                            foreach ($notifications as $notification) {
-                                        ?>
-                                                <li>
-                                                    <a href="#">
-                                                        <img class="pull-left m-r-10 avatar-img" src="<?php echo $notification['profile_picture']; ?>" alt="" />
-                                                        <div class="notification-content">
-                                                            <small class="notification-timestamp pull-right"><?php echo $notification['logs_time']; ?></small>
-                                                            <div class="notification-heading"><?php echo $notification['logs']; ?></div>
-                                                            <div class="notification-text"><?php echo $notification['logs_date']; ?> <div class="notification-timestamp pull-right" id="unreadTORead"><?php echo $notification['status']; ?></div> </div>
-                                                            
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                        <?php
-                                            }
-                                        }
-                                        ?>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <div class="dropdown dib">
-                            <div class="header-icon" data-toggle="dropdown">
-                                <i class="ti-email"></i>
-                                <div class="drop-down dropdown-menu dropdown-menu-right">
-                                    <div class="dropdown-content-heading">
-                                        <span class="text-left">2 New Messages</span>
-                                        <a href="email.html">
-                                            <i class="ti-pencil-alt pull-right"></i>
-                                        </a>
-                                    </div>
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                            <li class="notification-unread">
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img"
-                                                        src="images/avatar/1.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">02:34
-                                                            PM</small>
-                                                        <div class="notification-heading">Michael Qin</div>
-                                                        <div class="notification-text">Hi Teddy, Just wanted to let you
-                                                            ...</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="notification-unread">
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img"
-                                                        src="images/avatar/2.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">02:34
-                                                            PM</small>
-                                                        <div class="notification-heading">Mr. John</div>
-                                                        <div class="notification-text">Hi Teddy, Just wanted to let you
-                                                            ...</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img"
-                                                        src="images/avatar/3.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">02:34
-                                                            PM</small>
-                                                        <div class="notification-heading">Michael Qin</div>
-                                                        <div class="notification-text">Hi Teddy, Just wanted to let you
-                                                            ...</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img"
-                                                        src="images/avatar/2.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">02:34
-                                                            PM</small>
-                                                        <div class="notification-heading">Mr. John</div>
-                                                        <div class="notification-text">Hi Teddy, Just wanted to let you
-                                                            ...</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="text-center">
-                                                <a href="#" class="more-link">See All</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div> -->
-                        <div class="dropdown dib">
-                            <div class="header-icon" data-toggle="dropdown">
-                            <?php
-                                if(isset($_SESSION['auth_user']['student_id'])) {
-                                    $studID = $_SESSION['auth_user']['student_id'];
-
-                                    // Adjust your SQL query based on your database schema
-                                    $stmt = $conn->prepare("SELECT * FROM students_data WHERE id = ? ");
-                                    $stmt->execute([$studID]);
-                                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                                }
-                            ?>
-                                <span class="user-avatar"><?php echo $result['first_name'];?> <?php echo $result['last_name'];?>
-                                    <i class="ti-angle-down f-s-10"></i>
-                                </span>
-
-                                <div class="drop-down dropdown-profile dropdown-menu dropdown-menu-right">
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                            <li>
-                                                <a href="#" onclick="profile();">
-                                                    <i class="ti-user"></i>
-                                                    <span>Profile</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" onclick="settings();">
-                                                    <i class="ti-settings"></i>
-                                                    <span>Setting</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" onclick="logout();">
-                                                    <i class="ti-power-off"></i>
-                                                    <span>Logout</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+   
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -317,3 +161,137 @@
   }
 </script>
 
+<style>
+     .header-icon {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+    }
+    
+    .avatar-trigger {
+        display: flex;
+        align-items: center;
+    }
+    
+    .user-name {
+        font-weight: 500;
+        color: #000;
+    }
+    
+    .avatar-img {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    .nav-1 {
+            font-family: 'Source Serif 4', serif;
+            background: #fff;
+            border-bottom: 2px solid rgba(68, 68, 68, 0.66);
+            color: #D11010;
+            text-align: left;
+            align-items: center;
+            font-size: 20px;
+            font-weight: 400;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            display: flex;
+            align-items: left;
+            margin-bottom: 20px;
+            background-clip: padding-box;
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            height: 50px;
+            margin-left: 20px;
+        }
+
+        .nav-title-caption-container {
+            display: flex;
+            margin-left: 20px;
+        }
+
+        .nav-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .sidenav {
+            width: 18%;
+            background: #fff;
+            border-right: 2px solid rgba(68, 68, 68, 0.66);
+            height: 100%;
+            position: fixed; 
+            padding-top: 20px;
+            padding-right: 20px;
+            margin-top: 75px;
+            z-index: 1;
+        }
+
+        .sidenav img {
+            height: 30px;
+            margin-right: 10px;
+            filter: brightness(0) invert(0);
+        }
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            margin-top: 10px;
+            text-decoration: none;
+            font-size: 14px;
+            color:rgb(0, 0, 0);
+            display: block;
+            align-items: center;
+            border-top-left-radius: 0px;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            border-bottom-left-radius: 0px;
+        }
+
+        .sidenav a.active {
+            color: #f1f1f1;
+            background-color: #700000;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+            background-color: #700000;
+        }
+
+        .sidenav a:hover img{
+            filter: brightness(0) invert(1);
+        }
+
+        .user {
+            margin-right: 20px;
+            margin-left: auto;
+        }
+        
+        .main {
+            margin-left: 160px; 
+            padding: 0px 10px;
+        }   
+
+        .user-info {
+            display: flex; 
+            flex-direction: column; 
+            color: #000; 
+            align-items: center; 
+            justify-content: center; 
+            margin-right: 20px; 
+            font-family: 'Arial', sans-serif; 
+            font-size: 14px; 
+        }
+
+        .user-name {
+            margin-bottom: 10px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }   
+</style>
