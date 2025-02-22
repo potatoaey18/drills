@@ -66,7 +66,7 @@ require_once 'templates/stud_navbar.php';
 <!---------NAVIGATION BAR ENDS-------->
 
 
-    <div class="content-wrap" style="height: 80%; width: 70%;margin: 0 auto;    ">
+    <div class="content-wrap" style="height: 80%; width: 70%;margin: 0 auto;">
         <div class="main" style="background-color: #ffffff;">
             <div class="container-fluid">
                 <div class="row">
