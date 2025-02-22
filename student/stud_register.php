@@ -31,7 +31,7 @@ session_start();
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-            overflow-y: scroll;
+            overflow-y: auto;
             display: flex;
             align-items: center;
             justify-content: center;

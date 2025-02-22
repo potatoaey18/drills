@@ -49,8 +49,8 @@
             margin-top: 3rem;
             text-align: center;         
             color: #D11010;  
-            line-height: 1.3; /* Adjusted line height */
-            padding: 0 10px; /* Added padding to prevent edge overflow */
+            line-height: 1.3;
+            padding: 0 10px; 
         }
 
         h4 {

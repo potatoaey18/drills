@@ -30,7 +30,7 @@ session_start();
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-            overflow: hidden;
+            overflow-y: auto;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -197,7 +197,7 @@ session_start();
             margin-right: 10rem;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 950px) {
             .nav-1 {
                 flex-direction: column;
                 text-align: center;
