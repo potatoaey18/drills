@@ -17,6 +17,7 @@
             background-repeat: no-repeat;
             background-size: cover;
             overflow-y: scroll;
+            overflow-x: hidden;
             display: flex;
             align-items: center;
             justify-content: flex-end;    

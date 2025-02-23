@@ -221,10 +221,11 @@
         }
 
         .sidenav {
-            width: 18%;
+            width: 15%;
             background: #fff;
             border-right: 2px solid rgba(68, 68, 68, 0.66);
             height: 100%;
+            top: 0;
             position: fixed; 
             padding-top: 20px;
             padding-right: 20px;
