@@ -7,8 +7,6 @@ error_reporting(0);
 		
 		if(isset($_POST['LogIn']))
 		{
-            
-            
 			$email = $_POST['studEmail'];
 			$password = md5($_POST['studPword']);
 			

@@ -130,13 +130,12 @@ session_start();
 
         .login-section {
             background: #fff;
+            width: 850px;
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-top: 100px;
             text-align: left;
-            width: 90%;
-            max-width: 850px;
             display: flex;
             align-items: center;
             justify-content: center;
