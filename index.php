@@ -8,7 +8,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
 
         body {
-            font-family: Serif 4, sans-serif;
+            font-family: 'Source Serif 4', sans-serif;
             text-align: center;
             background: url(./image/landing.jpg);
             height: 100vh;
@@ -16,10 +16,13 @@
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-            overflow:hidden;
+            overflow-y: scroll;
+            overflow-x: hidden;
             display: flex;
             align-items: center;
             justify-content: flex-end;    
+            margin: 0;
+            padding: 0;
         }
         
         h2 {
@@ -32,8 +35,6 @@
             display: block;
             margin-block-start: 0.83em;
             margin-block-end: 0.83em;
-            margin-inline-start: 0px;
-            margin-inline-end: 0px;
             margin-top: 3rem;
             text-align: center;
         }
@@ -46,11 +47,11 @@
             display: block;
             margin-block-start: 1em;
             margin-block-end: 1em;
-            margin-inline-start: 0px;
-            margin-inline-end: 0px;
             margin-top: 3rem;
             text-align: center;         
             color: #D11010;  
+            line-height: 1.3;
+            padding: 0 10px; 
         }
 
         h4 {
@@ -76,7 +77,8 @@
 
         button {
             display: inline-block;
-            width: 500px;
+            width: 100%;
+            max-width: 500px;
             border: none;
             border-radius: 10px;
             color: #fff;
@@ -95,15 +97,15 @@
         }
 
         button:nth-child(3) {
-                background-color: #FABC3F;
+            background-color: #FABC3F;
         }
 
         button:nth-child(4) {
-                background-color: #E85C0E;
+            background-color: #E85C0E;
         }
 
         button:nth-child(5) {
-                background-color: #444444;
+            background-color: #444444;
         }
 
         .buttons-container {
@@ -119,8 +121,10 @@
 
         .container {
             height: 100%;
-            width: 40%;
-            background-color:rgb(218, 218, 218, 0.8);            
+            max-height: 100vh;
+            width: 100%;
+            max-width: 40%;
+            background-color: rgba(218, 218, 218, 0.8);            
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -131,6 +135,61 @@
 
         .logo {
             height: 100px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                max-width: 80%;
+                margin-right: 0;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            h3 {
+                font-size: 22px; /* Adjusted font size for smaller screens */
+                line-height: 1.4; /* Adjusted line height */
+                padding: 0 5px; /* Added padding to prevent edge overflow */
+            }
+
+            h4 {
+                font-size: 16px;
+            }
+
+            button {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                max-width: 100%;
+                padding: 0.5rem;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            h3 {
+                font-size: 18px; /* Further reduced font size for very small screens */
+                line-height: 1.5; /* Adjusted line height */
+                padding: 0 5px; /* Added padding to prevent edge overflow */
+            }
+
+            h4 {
+                font-size: 14px;
+            }
+
+            button {
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+
+            .logo {
+                height: 80px;
+            }
         }
     </style>
 </head>

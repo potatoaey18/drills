@@ -163,33 +163,17 @@ require_once 'templates/stud_navbar.php';
 
 
 
-  <div class="content-wrap">
-    <div class="main">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-8 p-r-0 title-margin-right">
-            <div class="page-header">
-              <div class="page-title">
-                <h1>Student Profile
-                </h1>
-              </div>
-            </div>
-          </div>
-          <!-- /# column -->
-          <div class="col-lg-4 p-l-0 title-margin-left">
-            <div class="page-header">
-              <div class="page-title">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item">
-                    <a href="dashboard.php">Dashboard</a>
-                  </li>
-                  <li class="breadcrumb-item active">App-Profile</li>
-                </ol>
-              </div>
-            </div>
-          </div>
-          <!-- /# column -->
-        </div>
+<div class="content-wrap" style="height: 80%; width: 100%;margin: 0 auto;">
+        <div style="background-color: white; margin-top: 6rem; margin-left: 16rem; padding: 2rem;">
+            <div>
+                <div>
+                    <div>
+                        <div class="page-header">
+                            <div class="page-title">
+                                <h1 style="font-size: 16px;"><b>MY PROFILE</b></h1>
+                            </div>
+                        </div>
+                    </div>
         <!-- /# row -->
         <section id="main-content">
           <!-- Begin Page Content -->
