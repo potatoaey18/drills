@@ -8,62 +8,7 @@ ini_set('display_errors', 1);
 session_start();
 if($_SESSION['auth_user']['student_id']==0){
   echo"<script>window.location.href='index.php'</script>";
-  
 }
-
-
-
-
-//REMOVE SKILLS
-if (isset($_POST['removeSKILL'])) {
-  $studID = $_SESSION['auth_user']['student_id'];
-
-  $selected_skill = $_POST['selected_skill'];
-
-
-  $sql = $conn->prepare("DELETE FROM stud_skills WHERE id = ?");
-  $sql->execute([$selected_skill]);
-
-  date_default_timezone_set('Asia/Manila');
-  $date = date('F / d l / Y');
-  $time = date('g:i A');
-  $logs = 'You removed a skill on your profile.';
-
-  $sql2 = $conn->prepare("INSERT INTO system_notification(student_id, logs, logs_date, logs_time) VALUES (?, ?, ?, ?)");
-  $sql2->execute([$studID, $logs, $date, $time]);
-
-    $_SESSION['alert'] = "Success...";
-    $_SESSION['status'] = "Skill Removed";
-    $_SESSION['status-code'] = "success";
-
-  
-}
-
-//ADD SKILLS
-if (isset($_POST['add_skills'])) {
-  $studID = $_SESSION['auth_user']['student_id'];
-
-  $skills_NAME = $_POST['skillsNAME'];
-
-
-  $sql = $conn->prepare("INSERT INTO stud_skills(stud_id, skills_name) VALUES (?, ?)");
-  $sql->execute([$studID, $skills_NAME]);
-
-  date_default_timezone_set('Asia/Manila');
-  $date = date('F / d l / Y');
-  $time = date('g:i A');
-  $logs = 'Skill added successfully.';
-
-  $sql2 = $conn->prepare("INSERT INTO system_notification(student_id, logs, logs_date, logs_time) VALUES (?, ?, ?, ?)");
-  $sql2->execute([$studID, $logs, $date, $time]);
-
-    $_SESSION['alert'] = "Success...";
-    $_SESSION['status'] = "Skill Inserted";
-    $_SESSION['status-code'] = "success";
-
-  
-}
-
 
 //UPLOAD PICTURE OR UPDATE PICTURE
 if (isset($_POST['upload'])) {
@@ -119,6 +64,16 @@ if (isset($_POST['upload'])) {
   }
 }
 
+// Fetch student data
+$studID = $_SESSION['auth_user']['student_id'];
+$stmt = $conn->prepare("SELECT * FROM students_data WHERE id = ?");
+$stmt->execute([$studID]);
+$data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Fetch student skills
+$skillsStmt = $conn->prepare("SELECT * FROM stud_skills WHERE stud_id = ?");
+$skillsStmt->execute([$studID]);
+$skills = $skillsStmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -133,17 +88,8 @@ if (isset($_POST['upload'])) {
 
     <title>OJT Web Portal: Student Profile</title>
     <!-- ================= Favicon ================== -->
-    <!-- Standard -->
     <link rel="shortcut icon" href="images/Picture1.png">
-    <!-- Retina iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
-    <!-- Retina iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
-    <!-- Standard iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
-    <!-- Standard iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">   
-
+    
     <!-- Common -->
     <link href="css/lib/font-awesome.min.css" rel="stylesheet">
     <link href="css/lib/themify-icons.css" rel="stylesheet">
@@ -152,291 +98,286 @@ if (isset($_POST['upload'])) {
     <link href="css/lib/helper.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/lib/sweetalert/sweetalert.css" rel="stylesheet">
+    
+    <style>
+        /* Custom styles to match the image */
+        body {
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+            color: #000;
+            overflow: hidden;
+        }
+        
+        .profile-card {
+            max-width: 1500px;
+            margin: 0 auto;
+            background-color: white;
+            overflow: hidden;
+        }
+        
+        .profile-header {
+            padding: 15px;
+            font-weight: bold;
+        }
+        
+        .profile-content {
+            display: flex;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        .profile-image {
+            flex: 0 0 300px;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .image-placeholder {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            border-radius: 50%;
+            border: 2px solid #e0e0e0;
+            background-color: #f8f8f8;
+            display: flex;
+            align-items: left;
+            justify-content: center;
+            overflow: hidden;
+            border: 10px solid #D9D9D9;
+        }
+        
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .placeholder-icon {
+            width: 100px;
+            height: auto;
+            opacity: 0.3;
+        }
+        
+        .choose-text {
+            margin-top: 10px;
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .student-info {
+            flex: 1;
+            padding: 10px 120px;
+        }
+        
+        .student-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .student-badge {
+            background-color: #ffc107;
+            color: #333;
+            font-size: 14px;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .student-details {
+            margin-top: 20px;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .detail-label {
+            flex: 0 0 150px;
+            font-weight: 500;
+        }
+        
+        .detail-value {
+            flex: 1;
+            font-weight: bold;
+        }
+        
+        .abnormal {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .upload-form {
+            margin-top: 15px;
+        }
+        
+        .upload-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 
 <body>
-<!---------NAVIGATION BAR-------->
-<?php
-require_once 'templates/stud_navbar.php';
-?>
-<!---------NAVIGATION BAR ENDS-------->
+    <!---------NAVIGATION BAR-------->
+    <?php
+    require_once 'templates/stud_navbar.php';
+    ?>
+    <!---------NAVIGATION BAR ENDS-------->
 
-
-
-<div class="content-wrap" style="height: 80%; width: 100%;margin: 0 auto;">
-        <div style="background-color: white; margin-top: 6rem; margin-left: 16rem; padding: 2rem;">
-            <div>
-                <div>
-                    <div>
-                        <div class="page-header">
+    <div class="content-wrap" style="height: 80%; width: 100%;margin: 0 auto;">
+    <div style="background-color: white; margin-top: 6rem; margin-left: 16rem; padding: 2rem;">
+    <div class="page-header">
                             <div class="page-title">
                                 <h1 style="font-size: 16px;"><b>MY PROFILE</b></h1>
                             </div>
                         </div>
-                    </div>
-        <!-- /# row -->
-        <section id="main-content">
-          <!-- Begin Page Content -->
-          <div class="container-fluid">
-
-<!-- Page Heading -->
-
-<div class="container bootstrap snippets bootdey">
-
-
-<div class="panel-body inf-content">
-<div class="row">
-  <?php
-if(isset($_SESSION['auth_user']['student_id'])){
-
-  $studID = $_SESSION['auth_user']['student_id'];
-
-  $stmt = $conn->prepare("SELECT * FROM students_data WHERE id = ? ");
-	$stmt->execute([$studID]);
-  $data = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-}
-?>
-
-<div class="col-md-4">
-<form action="" method="POST" enctype="multipart/form-data">
-<img alt="" id="myImage" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="<?php echo $data['profile_picture']; ?>" data-original-title="Usuario">
-<br><br>
-
-
-
-<label>Update/Upload Image</label>
-
-<input type="file" name="img_student" onchange="previewImage(event)" required accept="image/*"><br><br>
-
-<button name="upload" class="btn btn-primary">Upload</button>
-
-
-</form>
-
-</div>
-<div class="col-md-6">
-<strong>Information</strong><br>
-<div class="table-responsive">
-<table class="table table-user-information">
-<tbody>
-
-<tr>    
-    <td>
-        <strong>
-            <span class="ti-user"></span>    
-            Full Name                                                
-        </strong>
-    </td>
-    <td class="text-primary">
-    <?php echo $data['first_name']; ?> <?php echo $data['middle_name']; ?> <?php echo $data['last_name']; ?>  
-    </td>
-</tr>
-
-<tr>        
-    <td>
-        <strong>
-            <span class="ti-home"></span> 
-            Complete Address                                                
-        </strong>
-    </td>
-    <td class="text-primary">
-    <?php echo $data['complete_address']; ?>
-    </td>
-</tr>
-
-<tr>        
-    <td>
-        <strong>
-            <span class="ti-mobile"></span> 
-            Phone Number                                                
-        </strong>
-    </td>
-    <td class="text-primary">
-    <?php echo $data['phone_number']; ?>
-    </td>
-</tr>
-
-
-<tr>        
-    <td>
-        <strong>
-            <span class="ti-email"></span> 
-            Email Address                                                
-        </strong>
-    </td>
-    <td class="text-primary">
-    <?php echo $data['stud_email']; ?>
-    </td>
-</tr>
-
-<tr>        
-    <td>
-        <strong>
-            <span class="ti-files"></span> 
-            Skills                                              
-        </strong>
-    </td>
-    <td class="text-primary">
-    <?php
-if(isset($_SESSION['auth_user']['student_id'])){
-    $studID = $_SESSION['auth_user']['student_id'];
-
-    $stmt = $conn->prepare("SELECT * FROM stud_skills WHERE stud_id = ?");
-    $stmt->execute([$studID]);
-
-    // Fetch all skills associated with the student
-    $skills = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    if (!empty($skills)) {
-        foreach ($skills as $skill) {
-            // Access individual skill attributes within the loop
-            $skillName = $skill['skills_name'];
-
-            // Use the skill information as needed
-            echo "$skillName<br>";
-        }
-    } else {
-        echo "No skills found for this student.";
-    }
-}
-?>
-
-    <form action="" method="post">
-      <input type="text" name="skillsNAME" required>
-      <br><br>
-      <button name="add_skills" class="btn btn-primary">Add Skills</button>
-    </form>
-<br>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modelId_<?php echo $_SESSION['auth_user']['student_id']; ?>">
-          Remove Skill
-        </button>
-        
-        <!-- Modal -->
-        <div class="modal fade" id="modelId_<?php echo $_SESSION['auth_user']['student_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Remove Skill</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-                    <form action="" method="post">
-                        <div class="modal-body">
-                          <div class="form-group">
-                            <label for="selectskills"></label>
-                            <?php
-                                if(isset($_SESSION['auth_user']['student_id'])){
-                                    $studID = $_SESSION['auth_user']['student_id'];
-
-                                    $stmt = $conn->prepare("SELECT * FROM stud_skills WHERE stud_id = ?");
-                                    $stmt->execute([$studID]);
-
-                                    // Fetch all skills associated with the student
-                                    $skills = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                                    if (!empty($skills)) {
-                                        echo '<select class="form-control" name="selected_skill" id="selectskills">';
-                                        echo '<option value="">Select a Skill</option>';
-                                        
-                                        foreach ($skills as $skill) {
-                                            $skillName = $skill['skills_name'];
-                                            $skillID = $skill['id'];
-
-                                            echo "<option value='$skillID'>$skillName</option>";
-                                        }
-
-                                        echo '</select>';
-                                    } else {
-                                        echo '<p>No skills found for this student.</p>';
-                                    }
-                                }
-                            ?>
-
+                  <div class="profile-card">
+                      <div class="profile-content">
+                      <div class="profile-image">
+                              <div class="image-placeholder" onclick="document.getElementById('profile-input').click();">
+                                  <?php if(!empty($data['profile_picture']) && file_exists($data['profile_picture'])): ?>
+                                      <img src="<?php echo $data['profile_picture']; ?>" alt="Profile Image">
+                                  <?php else: ?>
+                                      <img src="images/placeholder.png" alt="Profile Placeholder" class="placeholder-icon">
+                                  <?php endif; ?>
+                              </div>
+                              
+                              <form action="" method="POST" enctype="multipart/form-data" class="upload-form">
+                                  <input type="file" name="img_student" id="profile-input" onchange="uploadImage(event)" required accept="image/*" style="display: none;">
+                                  <input type="submit" name="upload" id="upload-submit" style="display: none;">
+                              </form>
                           </div>
+                    
+                    <div class="student-info">
+                        <div class="student-name">
+                            <?php echo isset($data['first_name']) ? $data['first_name'] : ''; ?> 
+                            <?php echo isset($data['middle_name']) ? $data['middle_name'] : ''; ?> 
+                            <?php echo isset($data['last_name']) ? $data['last_name'] : ''; ?>
+                            <span class="student-badge">Student</span>
                         </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button name="removeSKILL" class="btn btn-danger">Remove</button>
+                        
+                        <div class="student-id">
+                            Student No.: <?php echo isset($data['student_ID']) ? $data['student_ID'] : 'N/A'; ?>
                         </div>
-                    </form>
+                        <br>
+                        <div class="student-details">
+                            <div class="detail-row">
+                                <div class="detail-label">Course</div>
+                                <div class="detail-value">: <?php echo isset($data['stud_course']) ? $data['stud_course'] : 'N/A'; ?></div>
+                            </div>
+                            
+                            <div class="detail-row">
+                                <div class="detail-label">Year</div>
+                                <div class="detail-value">: <?php echo isset($data['year_level']) ? $data['year_level'] : 'N/A'; ?></div>
+                            </div>
+                            
+                            <div class="detail-row">
+                                <div class="detail-label">Section</div>
+                                <div class="detail-value">: <?php echo isset($data['stud_section']) ? $data['stud_section'] : 'N/A'; ?></div>
+                            </div>
+                            
+                            <div class="detail-row">
+                                <div class="detail-label">Age</div>
+                                <div class="detail-value">: <?php echo isset($data['age']) ? $data['age'] . ' years old' : 'N/A'; ?></div>
+                            </div>
+                            
+                            <div class="detail-row">
+                                <div class="detail-label">OJT Adviser</div>
+                                <div class="detail-value">: <?php echo isset($data['ojt_adviser']) ? $data['ojt_adviser'] : 'N/A'; ?></div>
+                            </div>
+                            
+                            <div class="detail-row">
+                                <div class="detail-label">HTE</div>
+                                <div class="detail-value">: <?php echo isset($data['hte']) ? $data['hte'] : 'N/A'; ?></div>
+                            </div>
+                            
+                            <div class="detail-row">
+                                <div class="detail-label">Total rendered hours</div>
+                                <div class="detail-value">: <?php echo isset($data['rendered_hours']) ? $data['rendered_hours'] : 'N/A'; ?></div>
+                            </div>
+                            <br>
+                            <div class="detail-row">
+                                <div class="detail-label">Medical Condition</div>
+                                <div class="detail-value <?php echo (isset($data['medical_condition']) && $data['medical_condition'] == 'Abnormal') ? 'abnormal' : ''; ?>">
+                                    : <?php echo isset($data['medical_condition']) ? $data['medical_condition'] : 'N/A'; ?>
+                                    <br><br><br><br><br><br><br><br><br><br><br><br>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-    </td>
-</tr>
-
-                                    
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-
-
-
-</div>                                        
-
-</div>
-<!-- /.container-fluid -->
-          <!-- /# row -->
-          
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="footer">
-                <p>2024 © -
-                  <a href="#">Mabuhay</a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
     </div>
-  </div>
 
+    </div>
 
+    <!-- JavaScript for image preview -->
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.querySelector('.image-placeholder img');
+                output.src = reader.result;
+                output.classList.remove('placeholder-icon');
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 
-<!----------------UPLOAD OR UPDATE AN IMAGE AND DISPLAYS THE SELECTED IMAGE FIRST BEFORE UPDATING OR UPLOADING--------------->
-<script>
-    function previewImage(event) {
-  var reader = new FileReader();
-  reader.onload = function () {
-    var output = document.getElementById('myImage');
-    output.src = reader.result;
-  }
-  reader.readAsDataURL(event.target.files[0]);
-}
-</script>
+    <script>
+      function uploadImage(event) {
+          // Preview the image
+          previewImage(event);
+          
+          // Automatically submit the form when a file is selected
+          document.getElementById('upload-submit').click();
+      }
 
+      function previewImage(event) {
+          const file = event.target.files[0];
+          if (file) {
+              const reader = new FileReader();
+              reader.onload = function(e) {
+                  const placeholder = document.querySelector('.image-placeholder img');
+                  placeholder.src = e.target.result;
+              }
+              reader.readAsDataURL(file);
+          }
+      }
+    </script>
 
-
-    <!-- Common -->
+    <!-- Common Scripts -->
     <script src="js/lib/jquery.min.js"></script>
     <script src="js/lib/jquery.nanoscroller.min.js"></script>
     <script src="js/lib/menubar/sidebar.js"></script>
     <script src="js/lib/preloader/pace.min.js"></script>
     <script src="js/lib/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
-
     <script src="js/lib/sweetalert/sweetalert.min.js"></script>
     <script src="js/lib/sweetalert/sweetalert.init.js"></script>
 
     <?php 
-if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-
-?>
-    <script>
-    sweetAlert("<?php echo $_SESSION['alert']; ?>", "<?php echo $_SESSION['status']; ?>", "<?php echo $_SESSION['status-code']; ?>");
-    </script>
-<?php
-unset($_SESSION['status']);
-}
-?>
-
+    if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+    ?>
+        <script>
+        sweetAlert("<?php echo $_SESSION['alert']; ?>", "<?php echo $_SESSION['status']; ?>", "<?php echo $_SESSION['status-code']; ?>");
+        </script>
+    <?php
+    unset($_SESSION['status']);
+    }
+    ?>
 </body>
-
 </html>

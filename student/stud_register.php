@@ -300,8 +300,8 @@ session_start();
                     </div>
 
                     <div>
-                      <label for="email-3b9a">Middle Name <span class="required">*</span></label>
-                      <input type="text" placeholder="Middle Name" id="email-3b9a" name="m_name" required="true">
+                      <label for="email-3b9a">Middle Name</label>
+                      <input type="text" placeholder="Middle Name" id="email-3b9a" name="m_name">
                     </div>
 
                     <div>
