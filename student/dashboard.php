@@ -231,7 +231,48 @@ require_once 'templates/stud_navbar.php';
                         </div>
                     </div>
                 </section>
-    <br><br>
+
+                <br><br>
+                <div class="page-title">
+                    <h1 style="font-size: 16px; color: #700000; margin-left: 5rem;"><b>ANNOUNCEMENT</b></h1>
+                </div>
+                <br><br>
+                    <div style=" max-width: 62.5rem;
+                                margin: 0 auto;
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                justify-content: center;
+                                gap: 80px;">
+                        <div class="deadline-container">
+                            <div class="header">
+                                Deadline for Endorsement Processing
+                            </div>
+                            <div class="content">
+                                June 03, 2025
+                            </div>
+                        </div>
+
+                        <div class="deadline-container">
+                            <div class="header">
+                                Deadline for Endorsement Process
+                            </div>
+                            <div class="content">
+                                June 03, 2025
+                            </div>
+                        </div>
+
+                        <div class="deadline-container">
+                            <div class="header">
+                                Deadline for Endorsement Process
+                            </div>
+                            <div class="content">
+                                June 03, 2025
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+
                 <div class="page-title" style="display: flex; align-items: center; margin-left: 5rem;">
                         <img src="images/faqs.png" alt="faqs" style="margin-right: 10px;">
                         <h1 style="font-size: 16px; color: #700000; margin: 0;"><b>FAQs</b></h1>
@@ -253,302 +294,23 @@ require_once 'templates/stud_navbar.php';
                                 </div>
                         <div class="faq-item">
                             <div class="faq-header"> How is the OJT performance evaluated, and what is expected from me?<span>v</span></div>
-                            <div class="faq-content">
-                                During your OJT, your performance will be evaluated based on the tasks you perform, your punctuality, and your overall attitude towards work. Your OJT supervisor at the company will provide feedback, and PUP faculty members may visit or communicate with your supervisor for progress updates. You will also need to submit a report or final project summarizing your experience, which will be assessed as part of your OJT grade.                        </div>
-                            </div>
+                                <div class="faq-content">
+                                    During your OJT, your performance will be evaluated based on the tasks you perform, your punctuality, and your overall attitude towards work. Your OJT supervisor at the company will provide feedback, and PUP faculty members may visit or communicate with your supervisor for progress updates. You will also need to submit a report or final project summarizing your experience, which will be assessed as part of your OJT grade.                        </div>
+                                </div>
                     </div>
             </div>
         </div>
     </div>
 
-    <!-- jquery vendor -->
     <script src="js/lib/jquery.min.js"></script>
     <script src="js/lib/jquery.nanoscroller.min.js"></script>
-    <!-- nano scroller -->
-    <script src="js/lib/menubar/sidebar.js"></script>
-    <script src="js/lib/preloader/pace.min.js"></script>
-    <!-- sidebar -->
 
+    <script src="js/lib/preloader/pace.min.js"></script>\
     <script src="js/lib/bootstrap.min.js"></script>
-    <script src="js/scripts.js"></script>
-    <!-- bootstrap -->
 
-
-    <script src="js/lib/chart-js/Chart.bundle.js"></script>
-    <!-- <script src="js/lib/chart-js/chartjs-init.js"></script> -->
-
-    
-    <!-- scripit init-->
-    <script src="js/dashboard2.js"></script>
-
-    
     <script src="js/lib/sweetalert/sweetalert.min.js"></script>
     <script src="js/lib/sweetalert/sweetalert.init.js"></script>
 
-
-
-    <?php
-$studID = $_SESSION['auth_user']['student_id'];
-
-$stmt = $conn->prepare("SELECT * FROM stud_evaluation WHERE stud_id = ?");
-$stmt->execute([$studID]);
-
-$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$weeks = array_map(function($week) {
-    return "Week $week";
-}, array_column($rows, 'week'));
-
-$totalPoints = array_column($rows, 'total_points');
-
-$JobKnowledge = array_column($rows, 'job_knowledge');
-
-$dependability = array_column($rows, 'dependability');
-
-$communication_skills = array_column($rows, 'communication_skills');
-
-$conduct = array_column($rows, 'conduct');
-
-$initiative_and_creativity = array_column($rows, 'initiative_and_creativity');
-
-$cooperatives_and_relationship = array_column($rows, 'cooperatives_and_relationship');
-
-$attendance_and_punctuality = array_column($rows, 'attendance_and_punctuality');
-?>
-
-<script>
-    (function($) {
-        "use strict";
-
-        // Extract PHP arrays for JavaScript use
-        var weekData = <?= json_encode($weeks) ?>;
-        var totalPointsData = <?= json_encode($totalPoints) ?>;
-        var JobKnowledge = <?= json_encode($JobKnowledge) ?>;
-        var dependability = <?= json_encode($dependability) ?>;
-        var communication_skills = <?= json_encode($communication_skills) ?>;
-        var conduct = <?= json_encode($conduct) ?>;
-        var initiative_and_creativity = <?= json_encode($initiative_and_creativity) ?>;
-        var cooperatives_and_relationship = <?= json_encode($cooperatives_and_relationship) ?>;
-        var attendance_and_punctuality = <?= json_encode($attendance_and_punctuality) ?>;
-
-
-        //Team chart
-        var ctx = document.getElementById("team-chart");
-        ctx.height = 150;
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: weekData,
-                type: 'line',
-                defaultFontFamily: 'Montserrat',
-                datasets: [{
-                    data: totalPointsData,
-                    label: "Ratings",
-                    backgroundColor: 'rgba(0,103,255,.15)',
-                    borderColor: 'rgba(0,103,255,0.5)',
-                    borderWidth: 3.5,
-                    pointStyle: 'circle',
-                    pointRadius: 5,
-                    pointBorderColor: 'transparent',
-                    pointBackgroundColor: 'rgba(0,103,255,0.5)',
-                }, ]
-            },
-            options: {
-                responsive: true,
-                tooltips: {
-                    mode: 'index',
-                    titleFontSize: 12,
-                    titleFontColor: '#000',
-                    bodyFontColor: '#000',
-                    backgroundColor: '#fff',
-                    titleFontFamily: 'Montserrat',
-                    bodyFontFamily: 'Montserrat',
-                    cornerRadius: 3,
-                    intersect: false,
-                },
-                legend: {
-                    display: false,
-                    position: 'top',
-                    labels: {
-                        usePointStyle: true,
-                        fontFamily: 'Montserrat',
-                    },
-                },
-                scales: {
-                    xAxes: [{
-                        display: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                        scaleLabel: {
-                            display: false,
-                            labelString: 'Month'
-                        }
-                    }],
-                    yAxes: [{
-                        display: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Value'
-                        }
-                    }]
-                },
-                title: {
-                    display: false,
-                }
-            }
-        });
-
-
-
-        //bar chart
-	var ctx = document.getElementById( "barChart" );
-	//    ctx.height = 200;
-	var myChart = new Chart( ctx, {
-		type: 'bar',
-		data: {
-			labels: weekData,
-			datasets: [
-				{
-					label: "Job Knowledge",
-					data: JobKnowledge,
-                    borderColor: "rgba(255, 99, 132, 1)", // Red color
-					borderWidth: "0",
-					backgroundColor: "rgba(255, 99, 132, 0.5)"
-                            },
-				{
-					label: "Dependability",
-					data: dependability,
-					borderColor: "rgba(54, 162, 235, 1)", // Blue color
-                    borderWidth: "0",
-                    backgroundColor: "rgba(54, 162, 235, 0.5)"
-                            },
-                {
-					label: "Communication Skills",
-					data: communication_skills,
-					borderColor: "rgba(255, 206, 86, 1)", // Yellow color
-                    borderWidth: "0",
-                    backgroundColor: "rgba(255, 206, 86, 0.5)"
-                            },
-                {
-					label: "Conduct",
-					data: conduct,
-					borderColor: "rgba(255, 165, 0, 1)", // Orange color
-                    borderWidth: "0",
-                    backgroundColor: "rgba(255, 165, 0, 0.5)"
-                            },
-                {
-					label: "Initiative & Creativity",
-					data: initiative_and_creativity,
-					borderColor: "rgba(0, 255, 255, 1)", // Cyan color
-                    borderWidth: "0",
-                    backgroundColor: "rgba(0, 255, 255, 0.5)"
-
-                            },
-                {
-					label: "Cooperatives & Relationship",
-					data: cooperatives_and_relationship,
-					borderColor: "rgba(128, 0, 128, 1)", // Purple color
-                    borderWidth: "0",
-                    backgroundColor: "rgba(128, 0, 128, 0.5)"
-
-
-                            },
-                {
-					label: "Attendance & Punctuality",
-					data: attendance_and_punctuality,
-					borderColor: "rgba(50, 205, 50, 1)", // Purple color
-                    borderWidth: "0",
-                    backgroundColor: "rgba(50, 205, 50, 0.5)"
-
-
-                            }
-
-
-                        ]
-		},
-        options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            xAxes: [{
-                ticks: {
-                    autoSkip: false,
-                    maxRotation: 90,
-                    minRotation: 45,
-                    callback: function(value, index, values) {
-                        // Change font size based on window width
-                        var fontSize = window.innerWidth < 512 ? 10 : 14;
-                        return Chart.helpers.isArray(value) ? value.join(' ') : value;
-                    }
-                }
-            }],
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});
-
-    <?php
-$studID = $_SESSION['auth_user']['student_id'];
-$taskSTATUS = 'Finished';
-
-$stmt = $conn->prepare("SELECT COUNT(task_status) AS total_task_finished, task_date_of_deployed FROM stud_task_list WHERE stud_id = ? AND task_status = ? GROUP BY task_date_of_deployed");
-$stmt->execute([$studID, $taskSTATUS]);
-
-$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$task_date_of_deployed = array_column($rows, 'task_date_of_deployed');
-
-$total_task_finished = array_column($rows, 'total_task_finished');
-
-?>
-
-
-        var task_date_of_deployed = <?= json_encode($task_date_of_deployed) ?>;
-        var total_task_finished = <?= json_encode($total_task_finished) ?>;
-
-    // single bar chart
-	var ctx = document.getElementById( "singelBarChart" );
-	ctx.height = 150;
-	var myChart = new Chart( ctx, {
-		type: 'bar',
-		data: {
-			labels: task_date_of_deployed,
-			datasets: [
-				{
-                    label: "Total Task Finished",
-					data: total_task_finished,
-					borderColor: "rgba(0, 123, 255, 0.9)",
-					borderWidth: "0",
-					backgroundColor: "rgba(0, 123, 255, 0.5)"
-                            }
-                        ]
-		},
-		options: {
-			scales: {
-				yAxes: [ {
-					ticks: {
-						beginAtZero: true
-					}
-                                } ]
-			}
-		}
-	} );
-
-
-    
-
-    })(jQuery);
-</script>
 
 <script>
     let slideIndex = 0;
@@ -805,5 +567,42 @@ unset($_SESSION['status']);
 .stat {
     align-self: center;
     justify-self: center;
+}
+
+.deadline-container {
+  width: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: relative ;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
+
+.header {
+  background-color: #8B0000;
+  color: #ffffff;;
+  padding: 15px 20px;
+  font-size: 18px;
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 8px;
+  height: 8px;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.content {
+  background-color: #f0f0f0;   
+  color: #000000; 
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 24px;
 }
 </style>

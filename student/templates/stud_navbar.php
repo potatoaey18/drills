@@ -65,7 +65,7 @@
             <div class="sidenav">
                 <ul>
                     <li><a href="dashboard.php"><img src="images/home.png"> Home </a></li>
-                    <li><a href="dashboard.php"><img src="images/profile.png"> Profile </a></li>
+                    <li><a href="stud_profile.php"><img src="images/profile.png"> Profile </a></li>
                     <li><a href="dashboard.php"><img src="images/notification.png"> Notification </a></li>
                     <li><a href="dashboard.php"><img src="images/message.png"> Messages </a></li>
                 </ul>
