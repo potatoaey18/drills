@@ -140,7 +140,7 @@ session_start();
             
             /* Centering */
             position: absolute;
-            top: 60%;
+            top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
@@ -167,18 +167,18 @@ session_start();
             display: flex;
             align-items: center;
             background: none;
-            color: rgba(128, 128, 128, 0.5);
+            color: rgba(48, 48, 48, 0.7);
             border: none;
             cursor: pointer;
             font-size: 16px;
             font-weight: 400;
-            transition: 0.3s;
+            transition: color 0.3s ease;
         }
 
         .back-button img {
             height: 40px;
             filter: grayscale(100%);
-            opacity: 0.3;
+            opacity: 0.6;
             transition: filter 0.3s ease, opacity 0.3s ease;
         }
 

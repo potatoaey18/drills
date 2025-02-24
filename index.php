@@ -143,8 +143,8 @@
             <div class="buttons-container">
                 <h6>Identify Yourself</h6>
                 <button onclick="window.open('./student', '_self')"><b>Student</b></button>
-                <button onclick="window.open('./supervisor', '_self')"><b>Faculty</b></button>
-                <button onclick="window.open('./coordinator', '_self')"><b>H.T.E</b></button>
+                <button onclick="window.open('./coordinator', '_self')"><b>Faculty</b></button>
+                <button onclick="window.open('./supervisor', '_self')"><b>H.T.E</b></button>
                 <button onclick="window.open('./adminportal', '_self')"><b>Coordinator</b></button>
             </div>
         </div>
