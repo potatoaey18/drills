@@ -65,24 +65,29 @@ if(isset($_POST['action'])) {
             margin: 0 auto;
             background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(1,1,1,0.05);
+            border: 2px solid #8d8d8d;
+
+            box-shadow: -10px 0px 20px rgba(0, 0, 0, 0.1), 
+             10px 0px 20px rgba(0, 0, 0, 0.1);
+
         }
         
         .date-section {
-            border-bottom: 1px solid #eee;
+            border-bottom: none;
             padding: 10px 0;
         }
         
         .date-section:last-child {
-            border-bottom: 1px solid #8d8d8d;
+            border-bottom: none;
         }
         
         .date-label {
             font-size: 14px;
             font-weight: 600;
             color: #333;
-            padding: 10px 20px;
+            padding: 20px 20px;
             margin: 0;
+            border-bottom: 1px solid #8d8d8d;
         }
         
         .notification-card {
@@ -95,9 +100,6 @@ if(isset($_POST['action'])) {
             background-color: #f9f9f9;
         }
         
-        .notification-card:last-child {
-            border-bottom: none;
-        }
         
         .notification-content {
             display: flex;
@@ -225,7 +227,7 @@ require_once 'templates/stud_navbar.php';
                 <div>
                     <div class="page-header">
                         <div class="page-title">
-                            <h1 style="font-size: 16px;"><b>NOTIFICATIONS</b></h1><br>
+                            <h1 style="font-size: 16px;"><b>NOTIFICATIONS</b></h1><br><br>
                         </div>
                     </div>
                 </div>
